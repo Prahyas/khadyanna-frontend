@@ -10,40 +10,90 @@ const Form1 = ({ id, details }) => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
-    { goodname: '', specification: '', quantity: '' },
+    {
+      khadyanna: '',
+      months: {
+        shrawan: '',
+        bhadra: '',
+        ashwin: '',
+        kartik: '',
+        mangsir: '',
+        poush: '',
+        magh: '',
+        falgun: '',
+        chaitra: '',
+        baisakh: '',
+        jestha: '',
+        ashar: '',
+      },
+    },
   ]);
   const initialFormState = {
-    department: '',
-    goods: [],
-    date: '',
-    fiscalyear: '',
-    customername: '',
-    departmentid: '',
+    year: '',
+    aawo: '',
+    karyalaya: '',
+    months: [],
   };
 
-  const [data, setdata] = useState(initialFormState);
+  const [form1, setform1] = useState(initialFormState);
   const { departmentsData } = useContext(DataContext);
   const [departments, setDepartments] = departmentsData;
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
-    if (event.target.name === 'goodname') {
-      values[index].goodname = event.target.value;
-    } else if (event.target.name === 'specification') {
-      values[index].specification = event.target.value;
+    if (event.target.name === 'khadyanna') {
+      values[index].khadyanna = event.target.value;
+    } else if (event.target.name === 'shrawan') {
+      values[index].months.shrawan = event.target.value;
+    } else if (event.target.name === 'bhadra') {
+      values[index].months.bhadra = event.target.value;
+    } else if (event.target.name === 'ashwin') {
+      values[index].months.ashwin = event.target.value;
+    } else if (event.target.name === 'kartik') {
+      values[index].months.kartik = event.target.value;
+    } else if (event.target.name === 'mangsir') {
+      values[index].months.mangsir = event.target.value;
+    } else if (event.target.name === 'poush') {
+      values[index].months.poush = event.target.value;
+    } else if (event.target.name === 'magh') {
+      values[index].months.magh = event.target.value;
+    } else if (event.target.name === 'falgun') {
+      values[index].months.falgun = event.target.value;
+    } else if (event.target.name === 'chaitra') {
+      values[index].months.chaitra = event.target.value;
+    } else if (event.target.name === 'baisakh') {
+      values[index].months.baisakh = event.target.value;
+    } else if (event.target.name === 'jestha') {
+      values[index].months.jestha = event.target.value;
     } else {
-      values[index].quantity = event.target.value;
+      values[index].months.ashar = event.target.value;
     }
 
     setInputFields(values);
-    setdata({ ...data, goods: values });
+    setform1({ ...form1, months: values });
   };
 
   const handleAddFields = () => {
     const values = [...inputFields];
-    values.push({ goodname: '', specification: '', quantity: '' });
+    values.push({
+      khadyanna: '',
+      months: {
+        shrawan: '',
+        bhadra: '',
+        ashwin: '',
+        kartik: '',
+        mangsir: '',
+        poush: '',
+        magh: '',
+        falgun: '',
+        chaitra: '',
+        baisakh: '',
+        jestha: '',
+        ashar: '',
+      },
+    });
     setInputFields(values);
-    setdata({ ...data, goods: values });
+    setform1({ ...form1, months: values });
   };
 
   const handleRemoveFields = (index) => {
@@ -51,25 +101,26 @@ const Form1 = ({ id, details }) => {
     const values = [...inputFields];
     values.splice(index, 1);
     setInputFields(values);
-    setdata({ ...data, goods: values });
+    setform1({ ...form1, months: values });
   };
 
-  const onSubmit = async () => {
-    console.log('data', data);
-    await axios
-      .post(`${api}/api/details?populate=*`, {
-        data: data,
-      })
-      .then((response) => {
-        setdata(initialFormState);
-        successNotification();
-        setInterval(() => {
-          window.location.reload();
-        }, 1500);
-      })
-      .catch((error) => {
-        errorNotification();
-      });
+  const onSubmit = async (e) => {
+    // e.preventDefault();
+    // console.log('data', data);
+    // await axios
+    //   .post(`${api}/api/details?populate=*`, {
+    //     data: data,
+    //   })
+    //   .then((response) => {
+    //     setdata(initialFormState);
+    //     successNotification();
+    //     setInterval(() => {
+    //       window.location.reload();
+    //     }, 1500);
+    //   })
+    //   .catch((error) => {
+    //     errorNotification();
+    //   });
   };
 
   const successNotification = () =>
@@ -95,6 +146,10 @@ const Form1 = ({ id, details }) => {
     });
   };
 
+  useEffect(() => {
+    console.log('form1', form1);
+  }, [form1]);
+
   return (
     <>
       <div className='mb-2'>
@@ -113,12 +168,12 @@ const Form1 = ({ id, details }) => {
             <input
               type='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='yyyy/mm/dd'
-              value={data.date}
+              placeholder='Year'
+              value={form1.year}
               onChange={(e) =>
-                setdata({
-                  ...data,
-                  date: e.target.value,
+                setform1({
+                  ...form1,
+                  year: e.target.value,
                 })
               }
               required
@@ -134,12 +189,12 @@ const Form1 = ({ id, details }) => {
             <input
               type='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='yyyy/mm/dd'
-              value={data.date}
+              placeholder='Aawo'
+              value={form1.aawo}
               onChange={(e) =>
-                setdata({
-                  ...data,
-                  date: e.target.value,
+                setform1({
+                  ...form1,
+                  aawo: e.target.value,
                 })
               }
               required
@@ -156,11 +211,12 @@ const Form1 = ({ id, details }) => {
               type='text'
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              value={data.customername}
+              placeholder='Karyalaya'
+              value={form1.karyalaya}
               onChange={(e) =>
-                setdata({
-                  ...data,
-                  customername: e.target.value,
+                setform1({
+                  ...form1,
+                  karyalaya: e.target.value,
                 })
               }
               required
@@ -234,36 +290,29 @@ const Form1 = ({ id, details }) => {
                 <div className='flex mb-3'>
                   <select
                     id='countries'
-                    onChange={(e) =>
-                      setdata({
-                        ...data,
-                        department: e.target.value,
-                        departmentid: parseInt(e.target.value),
-                      })
-                    }
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                    name='khadyanna'
+                    className='mr-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                    required
+                    value={inputField.khadyanna}
+                    onChange={(event) => handleInputChange(index, event)}
                   >
-                    <option value='' defaultValue disabled>
+                    <option value='' selected disabled>
                       Select one...
                     </option>
-                    <option value=''>Dudh tatha dudh padartha</option>
-                    <option value=''>Teltahta gheu janya</option>
-                    <option value=''>Fal tatha saagpat</option>
+                    <option value='Dudh tatha dudh padartha'>
+                      Dudh tatha dudh padartha
+                    </option>
+                    <option value='Teltahta gheu janya'>
+                      Teltahta gheu janya
+                    </option>
+                    <option value='Fal tatha saagpat'>Fal tatha saagpat</option>
                     {/* {departments.map((department) => (
               <option key={department.id} value={department.id}>
                 {department.attributes.name}
               </option>
             ))} */}
                   </select>
-                  {/* <input
-                    type='text'
-                    className='w-full mr-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    required
-                    name='goodname'
-                    value={inputField.goodname}
-                    placeholder='Khadyanna'
-                    onChange={(event) => handleInputChange(index, event)}
-                  /> */}
+
                   <button
                     type='button'
                     className='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
@@ -289,8 +338,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='specification'
-                    value={inputField.specification}
+                    name='shrawan'
+                    value={inputField.months.shrawan}
                     placeholder='Shrawan'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -298,8 +347,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='bhadra'
+                    value={inputField.months.bhadra}
                     placeholder='Bhadra'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -307,8 +356,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='ashwin'
+                    value={inputField.months.ashwin}
                     placeholder='Ashwin'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -316,8 +365,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='kartik'
+                    value={inputField.months.kartik}
                     placeholder='Kartik'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -325,8 +374,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='mangsir'
+                    value={inputField.months.mangsir}
                     placeholder='Mangsir'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -334,8 +383,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='poush'
+                    value={inputField.months.poush}
                     placeholder='Poush'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -346,8 +395,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='magh'
+                    value={inputField.months.magh}
                     placeholder='Magh'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -355,8 +404,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='falgun'
+                    value={inputField.months.falgun}
                     placeholder='Falgun'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -364,8 +413,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='chaitra'
+                    value={inputField.months.chaitra}
                     placeholder='Chaitra'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -373,8 +422,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='baisakh'
+                    value={inputField.months.baisakh}
                     placeholder='Baisakh'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -382,8 +431,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='jestha'
+                    value={inputField.months.jestha}
                     placeholder='Jestha'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -391,8 +440,8 @@ const Form1 = ({ id, details }) => {
                     type='text'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    name='quantity'
-                    value={inputField.quantity}
+                    name='ashar'
+                    value={inputField.months.ashar}
                     placeholder='Ashar'
                     onChange={(event) => handleInputChange(index, event)}
                   />
@@ -403,10 +452,9 @@ const Form1 = ({ id, details }) => {
         </div>
 
         <button
-          type='button'
+          type='submit'
           onClick={onSubmit}
           className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-          disabled={!data.department}
         >
           Submit
         </button>
