@@ -191,7 +191,7 @@ const form1Inputs = ({ id, details }) => {
               कार्यालय
             </label>
             <input
-              type='text'
+              type='number'
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='कार्यालय'
@@ -348,7 +348,7 @@ const form1Inputs = ({ id, details }) => {
 
                 <div className='flex mb-3 space-x-3'>
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='shrawan'
@@ -357,7 +357,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='bhadra'
@@ -366,7 +366,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='ashwin'
@@ -375,7 +375,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='kartik'
@@ -384,7 +384,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='mangsir'
@@ -393,7 +393,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='poush'
@@ -405,7 +405,7 @@ const form1Inputs = ({ id, details }) => {
 
                 <div className='flex mb-3 space-x-3'>
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='magh'
@@ -414,7 +414,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='falgun'
@@ -423,7 +423,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='chaitra'
@@ -432,7 +432,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='baisakh'
@@ -441,7 +441,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='jestha'
@@ -450,7 +450,7 @@ const form1Inputs = ({ id, details }) => {
                     onChange={(event) => handleInputChange(index, event)}
                   />
                   <input
-                    type='text'
+                    type='number'
                     className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
                     name='ashar'

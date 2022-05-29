@@ -141,7 +141,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
         <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
           <div class='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-              फारम नं १
+              फारम नं १ सच्याउनुहोस्
             </h3>
             <button
               type='button'
@@ -341,7 +341,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
 
                       <div className='flex mb-3 space-x-3'>
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='shrawan'
@@ -350,7 +350,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='bhadra'
@@ -359,7 +359,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashwin'
@@ -368,7 +368,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='kartik'
@@ -377,7 +377,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='mangsir'
@@ -386,7 +386,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='poush'
@@ -398,7 +398,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
 
                       <div className='flex mb-3 space-x-3'>
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='magh'
@@ -407,7 +407,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='falgun'
@@ -416,7 +416,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='chaitra'
@@ -425,7 +425,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='baisakh'
@@ -434,7 +434,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='jestha'
@@ -443,7 +443,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           onChange={(event) => handleInputChange(index, event)}
                         />
                         <input
-                          type='text'
+                          type='number'
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashar'

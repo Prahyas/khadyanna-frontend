@@ -11,7 +11,7 @@ const Navbar = ({ showNav, setshowNav }) => {
 
   const Logout = (e) => {
     e.preventDefault();
-    setcurrentUser({});
+    setcurrentUser(null);
     navigate('/auth/login');
   };
 

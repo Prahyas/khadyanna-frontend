@@ -5,10 +5,10 @@ export const DataContext = createContext();
 4;
 
 export const DataProvider = (props) => {
-  const [api, setapi] = useState('http://localhost:1337');
-  // const [api, setapi] = useState('https://jinsibackend.herokuapp.com');
+  // const [api, setapi] = useState('http://localhost:1337');
+  const [api, setapi] = useState('https://food-project-v2.herokuapp.com');
   const [form1, setform1] = useState([]);
-  const [currentUser, setcurrentUser] = useState();
+  const [currentUser, setcurrentUser] = useState(null);
 
   const [foods, setFoods] = useState([
     {
