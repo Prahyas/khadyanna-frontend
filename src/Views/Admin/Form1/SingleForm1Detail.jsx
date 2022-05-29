@@ -117,9 +117,9 @@ const SingleForm1Detail = ({
                   </thead>
                   <tbody>
                     <tr>
-                      <td class='  px-6 py-4'>{attributes.karyalaya}</td>
-                      <td class=' px-6 py-4 '>{attributes.aawo}</td>
-                      <td class='  px-6 py-4'>{attributes.year}</td>
+                      <td class=' px-2 py-2'>{attributes.karyalaya}</td>
+                      <td class='px-2 py-2 '>{attributes.aawo}</td>
+                      <td class='px-2 py-2'>{attributes.year}</td>
                     </tr>
                   </tbody>
                   <br />

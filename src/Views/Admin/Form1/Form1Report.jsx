@@ -100,7 +100,7 @@ const Form1Report = () => {
               <th scope='col' class='w-[15%] px-6 py-3'>
                 कार्यालय
               </th>
-              <th scope='col' class='px-6 py-3'>
+              <th scope='col' class='w-[15%] px-6 py-3'>
                 आ . ब
               </th>
               <th scope='col' class='w-[15%] px-6 py-3'>
