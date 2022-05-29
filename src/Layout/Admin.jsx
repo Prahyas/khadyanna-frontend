@@ -5,7 +5,8 @@ import Sidebar from '../Components/Sidebar';
 import Dashboard from '../Views/Admin/Dashboard';
 import Details from '../Views/Admin/Details';
 import Settings from '../Views/Admin/Settings';
-import Form1 from '../Views/Admin/Form1';
+import Form1 from '../Views/Admin/Form1/Form1';
+import Form1Report from '../Views/Admin/Form1/Form1Report';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
@@ -21,6 +22,7 @@ const Admin = () => {
           <Routes>
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='form1' element={<Form1 />} />
+            <Route path='form1report' element={<Form1Report />} />
 
             <Route path='details' element={<Details />} />
             <Route path='settings' element={<Settings />} />

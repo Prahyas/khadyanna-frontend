@@ -8,12 +8,8 @@ import { useLocation } from 'react-router-dom';
 const Sidebar = ({ showNav, setshowNav }) => {
   const [dropdown1, setdropdown1] = useState(false);
   const [dropdown2, setdropdown2] = useState(false);
-  const { parameterData } = useContext(DataContext);
-  const [parameter, setParameter] = parameterData;
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const [gaupalika, setgaupalika] = useState([]);
-  const [parameterModal, setparameterModal] = useState(true);
   const location = useLocation();
 
   const fetchGaupalika = async () => {
@@ -60,11 +56,12 @@ const Sidebar = ({ showNav, setshowNav }) => {
               <span className='ml-3'>ड्यासबोर्ड </span>
             </NavLink>
           </li>
+
           <li>
-            <NavLink
-              to='/admin/form1'
-              onClick={() => setshowNav(!showNav)}
-              className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+            <button
+              type='button'
+              className='flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+              onClick={() => setdropdown1(!dropdown1)}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -74,32 +71,11 @@ const Sidebar = ({ showNav, setshowNav }) => {
               >
                 <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
               </svg>
-              <span className='ml-3'>फारम नं १ </span>
-            </NavLink>
-          </li>
-          {/* <li>
-            <button
-              type='button'
-              className='flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
-              onClick={() => setdropdown1(!dropdown1)}
-            >
-              <svg
-                className='flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white'
-                fill='currentColor'
-                viewBox='0 0 20 20'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z'
-                  clipRule='evenodd'
-                ></path>
-              </svg>
               <span
                 className='flex-1 ml-3 text-left whitespace-nowrap'
                 sidebar-toggle-item=''
               >
-                गाउँपालिका
+                फारम नं १
               </span>
               <svg
                 sidebar-toggle-item=''
@@ -117,24 +93,30 @@ const Sidebar = ({ showNav, setshowNav }) => {
             </button>
 
             <ul className={`${dropdown1 ? 'block' : 'hidden'} py-2 space-y-2`}>
-              {gaupalika.map((department) => {
-                return (
-                  <li key={department.id}>
-                    <NavLink
-                      to='/admin/details'
-                      onClick={() => {
-                        setParameter(department.attributes.name),
-                          setshowNav(!showNav);
-                      }}
-                      className='flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
-                    >
-                      {department.attributes.name}
-                    </NavLink>
-                  </li>
-                );
-              })}
+              <li>
+                <NavLink
+                  to='/admin/form1'
+                  onClick={() => {
+                    setshowNav(!showNav);
+                  }}
+                  className='flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                >
+                  नया इन्ट्री
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to='/admin/form1report'
+                  onClick={() => {
+                    setshowNav(!showNav);
+                  }}
+                  className='flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                >
+                  रिपोर्ट
+                </NavLink>
+              </li>
             </ul>
-          </li> */}
+          </li>
 
           <li>
             <NavLink
@@ -176,44 +158,6 @@ const Sidebar = ({ showNav, setshowNav }) => {
           </li> */}
         </ul>
       </div>
-      {!parameter && parameterModal && location.pathname == '/admin/details' ? (
-        <>
-          <div className=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-100 flex justify-center items-center h-full '>
-            <div className='relative px-4 w-full max-w-2xl h-full md:h-auto pt-5'>
-              <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
-                <div className='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
-                  <h3 className='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-                    Error
-                  </h3>
-                  <button
-                    type='button'
-                    className='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
-                    onClick={() => setparameterModal(false)}
-                  >
-                    <svg
-                      className='w-5 h-5'
-                      fill='currentColor'
-                      viewBox='0 0 20 20'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <path
-                        fillRule='evenodd'
-                        d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                        clipRule='evenodd'
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-
-                <div className='p-6 space-y-6'>
-                  {' '}
-                  Choose a department from sidebar
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
     </>
   );
 };

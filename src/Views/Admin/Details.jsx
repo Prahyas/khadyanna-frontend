@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import EditDetailsModal from '../../Components/DetailsModals/EditDetailsModal';
+import EditDetailsModal from './Form1/EditForm1Modal';
 import { DataContext } from '../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
