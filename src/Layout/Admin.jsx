@@ -15,6 +15,10 @@ const Admin = () => {
   const { currentUserData } = useContext(DataContext);
   const [currentUser, setcurrentUser] = currentUserData;
 
+  useEffect(() => {
+    console.log('currentUser', currentUser);
+  }, [currentUser]);
+
   return (
     <>
       <Sidebar showNav={showNav} setshowNav={setshowNav} />

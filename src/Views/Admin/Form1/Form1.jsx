@@ -15,18 +15,18 @@ const form1Inputs = ({ id, details }) => {
     {
       khadyanna: '',
       months: {
-        shrawan: '',
-        bhadra: '',
-        ashwin: '',
-        kartik: '',
-        mangsir: '',
-        poush: '',
-        magh: '',
-        falgun: '',
-        chaitra: '',
-        baisakh: '',
-        jestha: '',
-        ashar: '',
+        shrawan: 0,
+        bhadra: 0,
+        ashwin: 0,
+        kartik: 0,
+        mangsir: 0,
+        poush: 0,
+        magh: 0,
+        falgun: 0,
+        chaitra: 0,
+        baisakh: 0,
+        jestha: 0,
+        ashar: 0,
       },
     },
   ]);
@@ -34,7 +34,25 @@ const form1Inputs = ({ id, details }) => {
     year: '',
     aawo: '',
     karyalaya: '',
-    collection: [],
+    collection: [
+      {
+        khadyanna: '',
+        months: {
+          shrawan: 0,
+          bhadra: 0,
+          ashwin: 0,
+          kartik: 0,
+          mangsir: 0,
+          poush: 0,
+          magh: 0,
+          falgun: 0,
+          chaitra: 0,
+          baisakh: 0,
+          jestha: 0,
+          ashar: 0,
+        },
+      },
+    ],
   };
 
   const [form1Inputs, setform1Inputs] = useState(initialFormState);
@@ -80,18 +98,18 @@ const form1Inputs = ({ id, details }) => {
     values.push({
       khadyanna: '',
       months: {
-        shrawan: '',
-        bhadra: '',
-        ashwin: '',
-        kartik: '',
-        mangsir: '',
-        poush: '',
-        magh: '',
-        falgun: '',
-        chaitra: '',
-        baisakh: '',
-        jestha: '',
-        ashar: '',
+        shrawan: 0,
+        bhadra: 0,
+        ashwin: 0,
+        kartik: 0,
+        mangsir: 0,
+        poush: 0,
+        magh: 0,
+        falgun: 0,
+        chaitra: 0,
+        baisakh: 0,
+        jestha: 0,
+        ashar: 0,
       },
     });
     setInputFields(values);
@@ -184,14 +202,11 @@ const form1Inputs = ({ id, details }) => {
       <form>
         <div className='flex flex-wrap md:flex-row flex-col'>
           <div className='mr-5 mb-6  grow'>
-            <label
-              htmlFor='text'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               कार्यालय
             </label>
             <input
-              type='number'
+              type='text'
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='कार्यालय'
@@ -206,10 +221,7 @@ const form1Inputs = ({ id, details }) => {
             />
           </div>
           <div className='mb-6 grow md:mr-5'>
-            <label
-              htmlFor='email'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               आ . ब
             </label>
             <input
@@ -227,10 +239,7 @@ const form1Inputs = ({ id, details }) => {
             />
           </div>
           <div className='mb-6 grow md:mr-5'>
-            <label
-              htmlFor='email'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               आर्थिक बर्ष
             </label>
             <input
@@ -252,10 +261,7 @@ const form1Inputs = ({ id, details }) => {
         <hr className='mb-5' />
         <div className='mb-6'>
           <div className='flex justify-between items-center mb-2'>
-            <label
-              htmlFor='text'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               महिना
             </label>
             <button
@@ -468,6 +474,12 @@ const form1Inputs = ({ id, details }) => {
           type='submit'
           onClick={onSubmit}
           className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          disabled={
+            !form1Inputs.karyalaya ||
+            !form1Inputs.aawo ||
+            !form1Inputs.year ||
+            inputFields.khadyanna == ''
+          }
         >
           पेश गर्नुहोस्
         </button>

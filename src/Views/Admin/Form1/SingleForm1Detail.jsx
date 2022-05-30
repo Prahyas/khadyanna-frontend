@@ -11,36 +11,12 @@ const SingleForm1Detail = ({
   setreportModal,
 }) => {
   const componentRef = useRef();
+  const [total2, settotal2] = useState(null);
 
   useEffect(() => {
     console.log('selectedForm1', selectedForm1);
     console.log('attribbutes', attributes);
   }, [selectedForm1, attributes]);
-
-  //   const rows = [
-  //     { name: 'Khadyanna', render: (item) => item.khadyanna },
-  //     { name: 'Shrawan', render: (item) => item.months.shrawan },
-  //     { name: 'Bhadra', render: (item) => item.months.bhadra },
-  //     { name: 'Ashwin', render: (item) => item.months.ashwin },
-  //     { name: 'Kartik', render: (item) => item.months.kartik },
-  //     { name: 'Mangsir', render: (item) => item.months.mangsir },
-  //     { name: 'Poush', render: (item) => item.months.poush },
-  //     { name: 'Magh', render: (item) => item.months.magh },
-  //     { name: 'Falgun', render: (item) => item.months.falgun },
-  //     { name: 'Chaitra', render: (item) => item.months.chaitra },
-  //     { name: 'Baisakh', render: (item) => item.months.baisakh },
-  //     { name: 'Jestha', render: (item) => item.months.jestha },
-  //     { name: 'Ashar', render: (item) => item.months.ashar },
-  //   ];
-
-  //   const body = rows.map(({ name, render }) => (
-  //     <tr key={name}>
-  //       <td>{name}</td>
-  //       {attributes.collection.map((item, i) => (
-  //         <td key={i}>{render(item)}</td>
-  //       ))}
-  //     </tr>
-  //   ));
 
   return (
     <>
@@ -174,11 +150,20 @@ const SingleForm1Detail = ({
                     {attributes.collection.map((collectiondata) => {
                       const month = collectiondata.months;
                       const { id, ...onlyMonths } = month;
-                      console.log(onlyMonths);
-
+                      console.log('onlymonths', Object.values(onlyMonths));
                       const total = Object.values(onlyMonths).reduce(
-                        (t, n) => parseInt(t) + parseInt(n)
+                        (t, n) => t + n
                       );
+
+                      let result = attributes.collection.map(
+                        (a) => a.months.shrawan
+                      );
+
+                      const total2 = result.reduce((t, n) => t + n);
+                      useEffect(() => {
+                        settotal2(total2);
+                      }, []);
+
                       return (
                         <>
                           <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
@@ -226,6 +211,10 @@ const SingleForm1Detail = ({
                         </>
                       );
                     })}
+                    <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
+                      <td class='px-6 py-4'>जम्मा</td>
+                      <td class='text-left px-6 py-4'>{total2}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
