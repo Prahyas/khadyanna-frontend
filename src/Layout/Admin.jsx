@@ -7,6 +7,7 @@ import Details from '../Views/Admin/Details';
 import Settings from '../Views/Admin/Settings';
 import Form1 from '../Views/Admin/Form1/Form1';
 import Form1Report from '../Views/Admin/Form1/Form1Report';
+
 import { DataContext } from '../ContextAPI/data';
 import NotFound from '../Components/NotFound';
 
@@ -47,6 +48,8 @@ const Admin = () => {
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='form1' element={<Form1 />} />
                 <Route path='form1report' element={<Form1Report />} />
+                {/* <Route path='form2' element={<Form2 />} />
+                <Route path='form2report' element={<Form2Report />} /> */}
                 <Route path='settings' element={<Settings />} />
               </Routes>
             </>

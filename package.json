@@ -8,9 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sbmdkl/nepali-date-converter": "^1.3.3",
     "@sbmdkl/nepali-datepicker-reactjs": "^1.2.1",
     "axios": "^0.26.1",
     "flowbite": "^1.3.4",
+    "nepali-datepicker-reactjs": "^1.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-html-table-to-excel": "^2.0.0",

@@ -13,11 +13,6 @@ const SingleForm1Detail = ({
   const componentRef = useRef();
   const [total2, settotal2] = useState(null);
 
-  useEffect(() => {
-    console.log('selectedForm1', selectedForm1);
-    console.log('attribbutes', attributes);
-  }, [selectedForm1, attributes]);
-
   return (
     <>
       <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>
@@ -87,7 +82,7 @@ const SingleForm1Detail = ({
                         आ . ब
                       </th>
                       <th scope='col' class=' px-2 py-2'>
-                        आर्थिक बर्ष
+                        मिति
                       </th>
                     </tr>
                   </thead>
@@ -95,13 +90,13 @@ const SingleForm1Detail = ({
                     <tr>
                       <td class=' px-2 py-2'>{attributes.karyalaya}</td>
                       <td class='px-2 py-2 '>{attributes.aawo}</td>
-                      <td class='px-2 py-2'>{attributes.year}</td>
+                      <td class='px-2 py-2'>{attributes.date}</td>
                     </tr>
                   </tbody>
                   <br />
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                      <th scope='col' class='w-[10%] px-2 py-2'>
+                      <th scope='col' class='w-[15%] px-2 py-2'>
                         खाद्य समूह
                       </th>
                       <th scope='col' class='w-[5%] px-2 py-2'>
@@ -150,7 +145,6 @@ const SingleForm1Detail = ({
                     {attributes.collection.map((collectiondata) => {
                       const month = collectiondata.months;
                       const { id, ...onlyMonths } = month;
-                      console.log('onlymonths', Object.values(onlyMonths));
                       const total = Object.values(onlyMonths).reduce(
                         (t, n) => t + n
                       );
@@ -206,14 +200,14 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>
                               {collectiondata.months.ashar}
                             </td>
-                            <td class='px-6 py-4'>{total}</td>
+                            <td class='px-6 py-2'>{total}</td>
                           </tr>
                         </>
                       );
                     })}
                     <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
-                      <td class='px-6 py-4'>जम्मा</td>
-                      <td class='text-left px-6 py-4'>{total2}</td>
+                      <td class='font-bold px-2 py-2 '>जम्मा</td>
+                      <td class='px-2 py-2'>{total2}</td>
                     </tr>
                   </tbody>
                 </table>

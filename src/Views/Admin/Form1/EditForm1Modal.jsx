@@ -3,6 +3,9 @@ import { DataContext } from '../../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
+import 'nepali-datepicker-reactjs/dist/index.css';
+import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
 const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   const { apiData } = useContext(DataContext);
@@ -11,7 +14,8 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   const { fetchform1 } = fetchform1Function;
   const [inputFields, setInputFields] = useState([...attributes.collection]);
   const initialFormState = {
-    year: attributes.year,
+    date: attributes.date,
+    timecode: parseInt(attributes.timecode),
     aawo: attributes.aawo,
     karyalaya: attributes.karyalaya,
     collection: attributes.collection,
@@ -58,18 +62,18 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     values.push({
       khadyanna: '',
       months: {
-        shrawan: 0,
-        bhadra: 0,
-        ashwin: 0,
-        kartik: 0,
-        mangsir: 0,
-        poush: 0,
-        magh: 0,
-        falgun: 0,
-        chaitra: 0,
-        baisakh: 0,
-        jestha: 0,
-        ashar: 0,
+        shrawan: '',
+        bhadra: '',
+        ashwin: '',
+        kartik: '',
+        mangsir: '',
+        poush: '',
+        magh: '',
+        falgun: '',
+        chaitra: '',
+        baisakh: '',
+        jestha: '',
+        ashar: '',
       },
     });
     setInputFields(values);
@@ -77,15 +81,16 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   };
 
   const handleRemoveFields = (index) => {
-    console.log('index', index);
     const values = [...inputFields];
-    values.splice(index, 1);
+    if (values.length > 1) {
+      values.splice(index, 1);
+    }
     setInputFields(values);
     setform1Inputs({ ...form1Inputs, months: values });
   };
 
   const successNotification = () =>
-    toast.success('Data successfully submitted', {
+    toast.success('कार्य सफल', {
       position: 'top-right',
       autoClose: 1000,
       hideProgressBar: false,
@@ -95,8 +100,8 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
       progress: undefined,
     });
 
-  const errorNotification = () => {
-    toast.error('Error, data not submitted', {
+  const errorNotification = (error) => {
+    toast.error(`${error}`, {
       position: 'top-right',
       autoClose: 1000,
       hideProgressBar: false,
@@ -107,37 +112,25 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     });
   };
 
-  useEffect(() => {
-    console.log('form1Inputs', form1Inputs);
-    console.log('form1id', form1id);
-  }, [form1Inputs, form1id]);
-
-  const onSubmit = async (e, form1id) => {
-    e.preventDefault();
-    await axios
-      .put(`${api}/api/form1s/${form1id}`, {
+  const onSubmit = async (form1id) => {
+    try {
+      await axios.put(`${api}/api/form1s/${form1id}`, {
         data: form1Inputs,
-      })
-      .then((response) => {
-        setform1Inputs(initialFormState);
-        successNotification();
-        setInterval(() => {
-          setEditModal(false);
-          fetchform1();
-        }, 1500);
-      })
-      .catch((error) => {
-        errorNotification();
       });
+      setform1Inputs(initialFormState);
+      successNotification();
+      setInterval(() => {
+        setEditModal(false);
+        fetchform1();
+      }, 1100);
+    } catch (error) {
+      errorNotification(error);
+    }
   };
-
-  useEffect(() => {
-    console.log('attributes', attributes);
-  }, [attributes]);
 
   return (
     <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>
-      <div class='relative px-4 w-full max-w-2xl h-full pt-10'>
+      <div class='relative px-4 w-full max-w-3xl h-full pt-10'>
         <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
           <div class='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
@@ -166,11 +159,8 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
           <div class='p-6 space-y-6'>
             <form>
               <div className='flex flex-wrap md:flex-row flex-col'>
-                <div className='mr-5 mb-6  grow'>
-                  <label
-                    htmlFor='text'
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
+                <div className='mr-5 mb-6 '>
+                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                     कार्यालय
                   </label>
                   <input
@@ -188,11 +178,8 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                     required
                   />
                 </div>
-                <div className='mb-6 grow md:mr-5'>
-                  <label
-                    htmlFor='email'
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
+                <div className='mr-5 mb-6'>
+                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                     आ . ब
                   </label>
                   <input
@@ -209,36 +196,47 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                     required
                   />
                 </div>
-                <div className='mb-6 grow md:mr-5'>
-                  <label
-                    htmlFor='email'
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
-                    आर्थिक बर्ष
+                <div className='mr-5 mb-6'>
+                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                    मिति
                   </label>
-                  <input
-                    type='text'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    placeholder='आर्थिक बर्ष'
-                    value={form1Inputs.year}
-                    onChange={(e) =>
+                  <NepaliDatePicker
+                    inputClassName='form-control'
+                    className='mb-6'
+                    value={form1Inputs.date}
+                    onChange={(value) => {
+                      const adDate = bsToAd(value);
+
+                      const newtimestamp = Date.parse(adDate);
+
                       setform1Inputs({
                         ...form1Inputs,
-                        year: e.target.value,
-                      })
-                    }
-                    required
+                        date: value,
+                        timecode: newtimestamp,
+                      });
+                    }}
+                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                   />
+                  {/* <input
+              type='text'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              placeholder='आर्थिक बर्ष'
+              value={form1Inputs.date}
+              onChange={(e) =>
+                setform1Inputs({
+                  ...form1Inputs,
+                  date: e.target.value,
+                })
+              }
+              required
+            /> */}
                 </div>
               </div>
 
               <hr className='mb-5' />
               <div className='mb-6'>
                 <div className='flex justify-between items-center mb-2'>
-                  <label
-                    htmlFor='text'
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
+                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                     महिना
                   </label>
                   <button
@@ -279,44 +277,30 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           <option value='' selected disabled>
                             एउटा छान्नुहोस्
                           </option>
-                          <option value='Dudh tatha dudh padartha'>
+                          <option value='दुध तथा दुध पदार्थ'>
                             दुध तथा दुध पदार्थ
                           </option>
-                          <option value='Teltahta gheu janya'>
+                          <option value='तेल तथा घेउ जन्य'>
                             तेल तथा घेउ जन्य
                           </option>
-                          <option value='Teltahta gheu janya'>
-                            फल तथा सागपात
-                          </option>
-                          <option value='Teltahta gheu janya'>मसला</option>
-                          <option value='Teltahta gheu janya'>चिया, कफि</option>
-                          <option value='Teltahta gheu janya'>नुन</option>
-                          <option value='Teltahta gheu janya'>
+                          <option value='फल तथा सागपात'>फल तथा सागपात</option>
+                          <option value='मसला'>मसला</option>
+                          <option value='चिया, कफि'>चिया, कफि</option>
+                          <option value='नुन'>नुन</option>
+                          <option value='खाद्यान्न दलहन र सोबाट बनेको'>
                             खाद्यान्न दलहन र सोबाट बनेको
                           </option>
-                          <option value='Teltahta gheu janya'>
+                          <option value='प्र. पिउने पानी'>
                             प्र. पिउने पानी
                           </option>
-                          <option value='Teltahta gheu janya'>
-                            गुलियो पदार्थ
-                          </option>
-                          <option value='Teltahta gheu janya'>
-                            कन्फेक्सनरी
-                          </option>
-                          <option value='Teltahta gheu janya'>
+                          <option value='गुलियो पदार्थ'>गुलियो पदार्थ</option>
+                          <option value='कन्फेक्सनरी'>कन्फेक्सनरी</option>
+                          <option value=' मासु तथा मासुजन्य'>
                             मासु तथा मासुजन्य
                           </option>
-                          <option value='Teltahta gheu janya'>दाना</option>
-                          <option value='Teltahta gheu janya'>दाना</option>
-                          <option value='Teltahta gheu janya'>अन्य</option>
-                          <option value='Fal tatha saagpat'>
-                            Fal tatha saagpat
-                          </option>
-                          {/* {departments.map((department) => (
-              <option key={department.id} value={department.id}>
-                {department.attributes.name}
-              </option>
-            ))} */}
+                          <option value='दाना'>दाना</option>
+
+                          <option value='अन्य'>अन्य</option>
                         </select>
 
                         <button
@@ -339,118 +323,204 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </button>
                       </div>
 
-                      <div className='flex mb-3 space-x-3'>
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='shrawan'
-                          value={inputField.months.shrawan}
-                          placeholder='श्रावण'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='bhadra'
-                          value={inputField.months.bhadra}
-                          placeholder='भदौ'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='ashwin'
-                          value={inputField.months.ashwin}
-                          placeholder='आश्विन'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='kartik'
-                          value={inputField.months.kartik}
-                          placeholder='कार्तिक'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='mangsir'
-                          value={inputField.months.mangsir}
-                          placeholder='मंसिर'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='poush'
-                          value={inputField.months.poush}
-                          placeholder='पुष'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
+                      <div className='flex mb-2 space-x-3'>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            श्रावण
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='shrawan'
+                            value={inputField.months.shrawan}
+                            placeholder='श्रावण'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            भदौ
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='bhadra'
+                            value={inputField.months.bhadra}
+                            placeholder='भदौ'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            आश्विन
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='ashwin'
+                            value={inputField.months.ashwin}
+                            placeholder='आश्विन'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            कार्तिक
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='kartik'
+                            value={inputField.months.kartik}
+                            placeholder='कार्तिक'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            मंसिर
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='mangsir'
+                            value={inputField.months.mangsir}
+                            placeholder='मंसिर'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            पुष
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='poush'
+                            value={inputField.months.poush}
+                            placeholder='पुष'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
                       </div>
 
                       <div className='flex mb-3 space-x-3'>
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='magh'
-                          value={inputField.months.magh}
-                          placeholder='माघ'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='falgun'
-                          value={inputField.months.falgun}
-                          placeholder='फाल्गुन'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='chaitra'
-                          value={inputField.months.chaitra}
-                          placeholder='चैत्र'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='baisakh'
-                          value={inputField.months.baisakh}
-                          placeholder='बैशाख'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='jestha'
-                          value={inputField.months.jestha}
-                          placeholder='जेठ'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
-                        <input
-                          type='number'
-                          className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          required
-                          name='ashar'
-                          value={inputField.months.ashar}
-                          placeholder='असार'
-                          onChange={(event) => handleInputChange(index, event)}
-                        />
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            माघ
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='magh'
+                            value={inputField.months.magh}
+                            placeholder='माघ'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            फाल्गुन
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='falgun'
+                            value={inputField.months.falgun}
+                            placeholder='फाल्गुन'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            चैत्र
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='chaitra'
+                            value={inputField.months.chaitra}
+                            placeholder='चैत्र'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            बैशाख
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='baisakh'
+                            value={inputField.months.baisakh}
+                            placeholder='बैशाख'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            जेठ
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='jestha'
+                            value={inputField.months.jestha}
+                            placeholder='जेठ'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
+                        <div className='mb-2'>
+                          <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                            असार
+                          </label>
+                          <input
+                            type='number'
+                            className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                            required
+                            name='ashar'
+                            value={inputField.months.ashar}
+                            placeholder='असार'
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   );
@@ -458,13 +528,19 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
               </div>
 
               <button
-                type='submit'
-                onClick={(e) => {
-                  onSubmit(e, form1id);
+                type='button'
+                onClick={() => {
+                  onSubmit(form1id);
                 }}
                 className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                disabled={
+                  !form1Inputs.karyalaya ||
+                  !form1Inputs.aawo ||
+                  form1Inputs.date === '' ||
+                  inputFields.khadyanna == ''
+                }
               >
-                Submit
+                पेश गर्नुहोस्
               </button>
               <ToastContainer />
             </form>

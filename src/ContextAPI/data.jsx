@@ -94,7 +94,6 @@ export const DataProvider = (props) => {
 
   useEffect(() => {
     fetchform1();
-    console.log('form1 from data', form1);
   }, []);
 
   return (
