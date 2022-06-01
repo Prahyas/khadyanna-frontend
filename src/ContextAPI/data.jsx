@@ -6,7 +6,7 @@ export const DataContext = createContext();
 
 export const DataProvider = (props) => {
   // const [api, setapi] = useState('http://localhost:1337');
-  const [api, setapi] = useState('https://food-project-v2.herokuapp.com');
+  const [api, setapi] = useState('https://khadyaproject.herokuapp.com');
   const [form1, setform1] = useState([]);
   const [currentUser, setcurrentUser] = useState(null);
 
