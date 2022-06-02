@@ -16,10 +16,6 @@ const Register = () => {
   const { currentUserData } = useContext(DataContext);
   const [currentUser, setcurrentUser] = currentUserData;
 
-  useEffect(() => {
-    console.log('current', currentUser);
-  }, [currentUser]);
-
   const Register = async (e) => {
     try {
       e.preventDefault();

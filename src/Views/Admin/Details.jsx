@@ -59,16 +59,6 @@ const Details = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('departments', departments);
-  }, [departments]);
-  useEffect(() => {
-    console.log('filteredDepartments', filteredDepartments);
-  }, [departments]);
-  useEffect(() => {
-    console.log('selected', selectedDetail);
-  }, [selectedDetail]);
-
   return (
     <>
       {filteredDepartments.map((department) => {

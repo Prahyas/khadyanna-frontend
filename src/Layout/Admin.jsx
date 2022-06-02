@@ -10,15 +10,12 @@ import Form1Report from '../Views/Admin/Form1/Form1Report';
 
 import { DataContext } from '../ContextAPI/data';
 import NotFound from '../Components/NotFound';
+import NoAuthorization from '../Views/Admin/NoAuthorization';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
   const { currentUserData } = useContext(DataContext);
   const [currentUser, setcurrentUser] = currentUserData;
-
-  useEffect(() => {
-    console.log('currentUser', currentUser);
-  }, [currentUser]);
 
   return (
     <>
@@ -46,8 +43,60 @@ const Admin = () => {
             <>
               <Routes>
                 <Route path='dashboard' element={<Dashboard />} />
-                <Route path='form1' element={<Form1 />} />
-                <Route path='form1report' element={<Form1Report />} />
+                {currentUser.user.department === 'PS' ? (
+                  <>
+                    <Route path='form1' element={<Form1 />} />
+                    <Route path='form1report' element={<Form1Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form1'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form1report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                {currentUser.user.department === 'FFSQRD' ? (
+                  <>
+                    <Route path='form2' element={<Form1 />} />
+                    <Route path='form2report' element={<Form1Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form2'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form2report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
                 {/* <Route path='form2' element={<Form2 />} />
                 <Route path='form2report' element={<Form2Report />} /> */}
                 <Route path='settings' element={<Settings />} />

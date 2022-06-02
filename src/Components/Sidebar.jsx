@@ -12,21 +12,6 @@ const Sidebar = ({ showNav, setshowNav }) => {
   const [api, setapi] = apiData;
   const location = useLocation();
 
-  const fetchGaupalika = async () => {
-    try {
-      const response = await axios.get(
-        `${api}/api/departments?filters[type]=गाउँपालिका`
-      );
-      setgaupalika(response.data.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchGaupalika();
-  }, []);
-
   return (
     <>
       <div

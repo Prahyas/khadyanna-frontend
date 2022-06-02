@@ -29,10 +29,6 @@ const Login = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('current User', currentUser);
-  }, [currentUser]);
-
   const Login = async (e) => {
     try {
       e.preventDefault();
