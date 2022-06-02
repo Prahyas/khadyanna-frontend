@@ -62,18 +62,18 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     values.push({
       khadyanna: '',
       months: {
-        shrawan: '',
-        bhadra: '',
-        ashwin: '',
-        kartik: '',
-        mangsir: '',
-        poush: '',
-        magh: '',
-        falgun: '',
-        chaitra: '',
-        baisakh: '',
-        jestha: '',
-        ashar: '',
+        shrawan: 0,
+        bhadra: 0,
+        ashwin: 0,
+        kartik: 0,
+        mangsir: 0,
+        poush: 0,
+        magh: 0,
+        falgun: 0,
+        chaitra: 0,
+        baisakh: 0,
+        jestha: 0,
+        ashar: 0,
       },
     });
     setInputFields(values);
@@ -119,9 +119,9 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
       });
       setform1Inputs(initialFormState);
       successNotification();
+      fetchform1();
       setInterval(() => {
         setEditModal(false);
-        fetchform1();
       }, 1100);
     } catch (error) {
       errorNotification(error);

@@ -17,18 +17,18 @@ const Form1 = () => {
     {
       khadyanna: '',
       months: {
-        shrawan: '',
-        bhadra: '',
-        ashwin: '',
-        kartik: '',
-        mangsir: '',
-        poush: '',
-        magh: '',
-        falgun: '',
-        chaitra: '',
-        baisakh: '',
-        jestha: '',
-        ashar: '',
+        shrawan: 0,
+        bhadra: 0,
+        ashwin: 0,
+        kartik: 0,
+        mangsir: 0,
+        poush: 0,
+        magh: 0,
+        falgun: 0,
+        chaitra: 0,
+        baisakh: 0,
+        jestha: 0,
+        ashar: 0,
       },
     },
   ]);
@@ -41,18 +41,18 @@ const Form1 = () => {
       {
         khadyanna: '',
         months: {
-          shrawan: '',
-          bhadra: '',
-          ashwin: '',
-          kartik: '',
-          mangsir: '',
-          poush: '',
-          magh: '',
-          falgun: '',
-          chaitra: '',
-          baisakh: '',
-          jestha: '',
-          ashar: '',
+          shrawan: 0,
+          bhadra: 0,
+          ashwin: 0,
+          kartik: 0,
+          mangsir: 0,
+          poush: 0,
+          magh: 0,
+          falgun: 0,
+          chaitra: 0,
+          baisakh: 0,
+          jestha: 0,
+          ashar: 0,
         },
       },
     ],
@@ -101,18 +101,18 @@ const Form1 = () => {
     values.push({
       khadyanna: '',
       months: {
-        shrawan: '',
-        bhadra: '',
-        ashwin: '',
-        kartik: '',
-        mangsir: '',
-        poush: '',
-        magh: '',
-        falgun: '',
-        chaitra: '',
-        baisakh: '',
-        jestha: '',
-        ashar: '',
+        shrawan: 0,
+        bhadra: 0,
+        ashwin: 0,
+        kartik: 0,
+        mangsir: 0,
+        poush: 0,
+        magh: 0,
+        falgun: 0,
+        chaitra: 0,
+        baisakh: 0,
+        jestha: 0,
+        ashar: 0,
       },
     });
     setInputFields(values);
@@ -128,14 +128,10 @@ const Form1 = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     await axios
-      .post(
-        `${api}/api/form1s?populate[0]=collection&populate[1]=collection.months`,
-        {
-          data: form1Inputs,
-        }
-      )
+      .post(`${api}/api/form1s`, {
+        data: form1Inputs,
+      })
       .then((response) => {
         setform1Inputs(initialFormState);
         setInputFields([
@@ -158,9 +154,9 @@ const Form1 = () => {
           },
         ]);
         successNotification();
+        fetchform1();
         setInterval(() => {
-          fetchform1();
-          navigate('/admin/form1report');
+          navigate('/admin/form1Report');
         }, 1100);
       })
       .catch((error) => {
