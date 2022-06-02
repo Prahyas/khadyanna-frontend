@@ -70,7 +70,7 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.department === 'FFSQRD' ? (
                   <>
                     <Route path='form2' element={<Form1 />} />
                     <Route path='form2report' element={<Form1Report />} />
