@@ -331,7 +331,25 @@ const Form1 = () => {
 
                     <option value='अन्य'>अन्य</option>
                   </select>
-
+                  <button
+                    type='button'
+                    onClick={() => handleAddFields()}
+                    className='mr-2 flex justify-center items-center py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5 mr-2'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                    >
+                      <path
+                        fillRule='evenodd'
+                        d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
+                    <span>नया</span>
+                  </button>
                   <button
                     type='button'
                     className='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
