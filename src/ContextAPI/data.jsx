@@ -36,30 +36,6 @@ export const DataProvider = (props) => {
         ],
       },
     },
-    {
-      attributes: {
-        year: '456',
-        karyalaya: 'qwerty',
-        data: [
-          {
-            khadyanna: 'Dudh',
-            months: {
-              baisakh: '1',
-              jestha: '2',
-              ashar: '3',
-            },
-          },
-          {
-            khadyanna: 'Tel',
-            months: {
-              baisakh: '4',
-              jestha: '5',
-              ashar: '6',
-            },
-          },
-        ],
-      },
-    },
   ]);
 
   useEffect(() => {
