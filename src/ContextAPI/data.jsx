@@ -20,7 +20,7 @@ export const DataProvider = (props) => {
           {
             khadyanna: 'Dudh',
             months: {
-              baisakh: '2',
+              baisakh: '3',
               jestha: '2',
               ashar: '3',
             },
