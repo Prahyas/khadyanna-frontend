@@ -36,9 +36,7 @@ const Form1Report = () => {
       .delete(`${api}/api/form1s/${form1id}`)
       .then((response) => {
         deleteNotification();
-        setInterval(() => {
-          fetchform1();
-        }, 1100);
+        fetchform1();
       })
       .catch((error) => {
         errorNotification();

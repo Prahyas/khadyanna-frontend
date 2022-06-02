@@ -155,9 +155,6 @@ const Form1 = () => {
         ]);
         successNotification();
         fetchform1();
-        setInterval(() => {
-          navigate('/admin/form1Report');
-        }, 1100);
       })
       .catch((error) => {
         errorNotification();

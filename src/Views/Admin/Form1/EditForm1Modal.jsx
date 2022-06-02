@@ -120,9 +120,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
       setform1Inputs(initialFormState);
       successNotification();
       fetchform1();
-      setInterval(() => {
-        setEditModal(false);
-      }, 1100);
+      setEditModal(false);
     } catch (error) {
       errorNotification(error);
     }
