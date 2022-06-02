@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import '@sbmdkl/nepali-datepicker-reactjs/dist/index.css';
+
 import { DataContext } from '../../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
