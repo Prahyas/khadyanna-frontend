@@ -44,60 +44,65 @@ const SingleForm1Detail = ({
               <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
                 रिपोर्ट
               </h3>
-              <button
-                type='button'
-                class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
-                onClick={() => setreportModal(false)}
-              >
-                <svg
-                  class='w-5 h-5'
-                  fill='currentColor'
-                  viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'
+              <div className='flex'>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className='mr-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'>
+                      प्रिन्ट गर्नुहोस
+                    </button>
+                  )}
+                  content={() => componentRef.current}
+                />
+                <ReactHtmlTableToExcel
+                  id='test-table-xls-button'
+                  className='mr-5 download-table-xls-button text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
+                  table='table-to-xls'
+                  filename='tablexls'
+                  sheet='tablexls'
+                  buttonText='डाउन्लोड गर्नुहोस'
+                />
+
+                <button
+                  type='button'
+                  class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
+                  onClick={() => setreportModal(false)}
                 >
-                  <path
-                    fill-rule='evenodd'
-                    d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clip-rule='evenodd'
-                  ></path>
-                </svg>
-              </button>
+                  <svg
+                    class='w-5 h-5'
+                    fill='currentColor'
+                    viewBox='0 0 20 20'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      fill-rule='evenodd'
+                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                      clip-rule='evenodd'
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div className='flex justify-end my-5 px-5'>
-              <ReactToPrint
-                trigger={() => (
-                  <button className='mr-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'>
-                    प्रिन्ट गर्नुहोस
-                  </button>
-                )}
-                content={() => componentRef.current}
-              />
-              <ReactHtmlTableToExcel
-                id='test-table-xls-button'
-                className='download-table-xls-button text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
-                table='table-to-xls'
-                filename='tablexls'
-                sheet='tablexls'
-                buttonText='डाउन्लोड गर्नुहोस'
-              />
-            </div>
-            <div ref={componentRef} class='p-6 space-y-3'>
-              <div className='mb-5 flex justify-between text-black font-bold'>
+
+            <div ref={componentRef} class='p-6 space-y-5'>
+              <span className='flex justify-center text-black  align-center text-xl'>
+                खाद्य ऐन / नियम बमोजिम संकलित नमुना विवरण
+              </span>
+              <div className='mb-5 flex justify-between text-black '>
                 <div className='flex flex-col'>
                   <span className='mb-2'>
                     {' '}
                     कार्यालय : {attributes.karyalaya}
                   </span>
-                  <span>आर्थिक वर्ष: {attributes.aawo}</span>
+                  <span>आर्थिक वर्ष : {attributes.aawo}</span>
                 </div>
-                <span> मिति: {attributes.date}</span>
+                <span> मिति : {attributes.date}</span>
               </div>
 
               <div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
                 <table class=' mb-5 w-full text-sm text-left text-gray-700 dark:text-gray-400'>
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                      <th scope='col' class='w-[15%] px-2 py-2'>
+                      <th scope='col' class='w-[25%] px-2 py-2'>
                         खाद्य समूह
                       </th>
                       <th scope='col' class='w-[5%] px-2 py-2'>
@@ -195,7 +200,7 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>
                               {collectiondata.months.ashar}
                             </td>
-                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                            <td class='border-l-2 border-l-gray-400  px-2 py-2'>
                               {rowTotal}
                             </td>
                           </tr>
@@ -222,7 +227,7 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>{item.baisakh}</td>
                             <td class='px-2 py-2'>{item.jestha}</td>
                             <td class='px-2 py-2'>{item.ashar}</td>
-                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                            <td class='border-l-2 border-l-gray-400  px-2 py-2'>
                               {grandTotal}
                             </td>
                           </>
@@ -241,6 +246,9 @@ const SingleForm1Detail = ({
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
                       <th scope='col' class=' px-2 py-2'>
+                        फारम नं १
+                      </th>
+                      <th scope='col' class=' px-2 py-2'>
                         कार्यालय
                       </th>
                       <th scope='col' class=' px-2 py-2'>
@@ -253,6 +261,9 @@ const SingleForm1Detail = ({
                   </thead>
                   <tbody>
                     <tr>
+                      <td class=' px-2 py-2'>
+                        खाद्य ऐन / नियम बमोजिम संकलित नमुना विवरण
+                      </td>
                       <td class=' px-2 py-2'>{attributes.karyalaya}</td>
                       <td class='px-2 py-2 '>{attributes.aawo}</td>
                       <td class='px-2 py-2'>{attributes.date}</td>
