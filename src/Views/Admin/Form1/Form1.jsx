@@ -401,7 +401,7 @@ const Form1 = () => {
                   </button>
                 </div>
 
-                <div className='flex mb-2 space-x-3'>
+                <div className='flex flex-wrap md:flex-nowrap mb-2 space-x-3'>
                   <div className='mb-2'>
                     <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                       श्रावण
@@ -444,7 +444,6 @@ const Form1 = () => {
                       onChange={(event) => handleInputChange(index, event)}
                     />
                   </div>
-
                   <div className='mb-2'>
                     <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                       कार्तिक
@@ -487,9 +486,7 @@ const Form1 = () => {
                       onChange={(event) => handleInputChange(index, event)}
                     />
                   </div>
-                </div>
 
-                <div className='flex mb-3 space-x-3'>
                   <div className='mb-2'>
                     <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                       माघ

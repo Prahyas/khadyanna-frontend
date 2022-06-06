@@ -128,7 +128,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
 
   return (
     <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>
-      <div class='relative px-4 w-full max-w-3xl h-full pt-10'>
+      <div class='relative px-4 w-full max-w-4xl h-full pt-10'>
         <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
           <div class='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
@@ -337,7 +337,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </button>
                       </div>
 
-                      <div className='flex mb-2 space-x-3'>
+                      <div className='flex flex-wrap md:flex-nowrap mb-2 space-x-3'>
                         <div className='mb-2'>
                           <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                             श्रावण
@@ -435,9 +435,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                             }
                           />
                         </div>
-                      </div>
 
-                      <div className='flex mb-3 space-x-3'>
                         <div className='mb-2'>
                           <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                             माघ
