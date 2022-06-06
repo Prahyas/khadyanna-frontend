@@ -11,7 +11,29 @@ const SingleForm1Detail = ({
   setreportModal,
 }) => {
   const componentRef = useRef();
-  const [total2, settotal2] = useState(null);
+
+  const monthsArray = attributes.collection.map((item) => {
+    const month = item.months;
+    const { id, ...onlyMonths } = month;
+    return onlyMonths;
+  });
+
+  const columnTotal = [
+    monthsArray.reduce((acc, n) => {
+      for (var prop in n) {
+        if (acc.hasOwnProperty(prop)) acc[prop] += n[prop];
+        else acc[prop] = n[prop];
+      }
+      return acc;
+    }, {}),
+  ];
+
+  const grandTotal = Object.values(columnTotal[0]).reduce(
+    (accumulator, value) => {
+      return accumulator + value;
+    },
+    0
+  );
 
   return (
     <>
@@ -60,18 +82,161 @@ const SingleForm1Detail = ({
               />
             </div>
             <div ref={componentRef} class='p-6 space-y-3'>
-              {/* <div className='mb-5 flex justify-between text-black font-bold'>
+              <div className='mb-5 flex justify-between text-black font-bold'>
                 <div className='flex flex-col'>
-                  <span className='mb-2'>बुझेको मिति : {attributes.date}</span>
-                  <span>आर्थिक वर्ष: {attributes.fiscalyear}</span>
+                  <span className='mb-2'>
+                    {' '}
+                    कार्यालय : {attributes.karyalaya}
+                  </span>
+                  <span>आर्थिक वर्ष: {attributes.aawo}</span>
                 </div>
-                <span>बुझी लिनेको नाम: {attributes.customername}</span>
-              </div> */}
+                <span> मिति: {attributes.date}</span>
+              </div>
 
               <div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
+                <table class=' mb-5 w-full text-sm text-left text-gray-700 dark:text-gray-400'>
+                  <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+                    <tr>
+                      <th scope='col' class='w-[15%] px-2 py-2'>
+                        खाद्य समूह
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        श्रावण
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        भदौ
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        आश्विन
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        कार्तिक
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        मंसिर
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        पुष
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        माघ
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        फाल्गुन
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        चैत्र
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        बैशाख
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        जेठ
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        असार
+                      </th>
+                      <th
+                        scope='col'
+                        class='border-l-2 border-l-gray-400 w-[5%] px-2 py-2'
+                      >
+                        हालसम्मको जम्मा
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {attributes.collection.map((collectiondata) => {
+                      const month = collectiondata.months;
+
+                      const { id, ...onlyMonths } = month;
+                      const rowTotal = Object.values(onlyMonths).reduce(
+                        (t, n) => t + n
+                      );
+
+                      return (
+                        <>
+                          <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
+                            <td class='font-bold px-2 py-2 '>
+                              {collectiondata.khadyanna}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.shrawan}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.bhadra}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.ashwin}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.kartik}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.mangsir}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.poush}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.magh}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.falgun}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.chaitra}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.baisakh}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.jestha}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.months.ashar}
+                            </td>
+                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                              {rowTotal}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+
+                  <tfoot>
+                    <tr class='border-b-2 border-t-2 border-t-gray-400 border-b-gray-400 dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
+                      <td class='font-bold px-2 py-2 '>जम्मा</td>
+                      {columnTotal.map((item) => {
+                        return (
+                          <>
+                            <td class='px-2 py-2'>{item.shrawan}</td>
+                            <td class='px-2 py-2'>{item.bhadra}</td>
+                            <td class='px-2 py-2'>{item.ashwin}</td>
+                            <td class='px-2 py-2'>{item.kartik}</td>
+                            <td class='px-2 py-2'>{item.mangsir}</td>
+                            <td class='px-2 py-2'>{item.poush}</td>
+                            <td class='px-2 py-2'>{item.magh}</td>
+                            <td class='px-2 py-2'>{item.falgun}</td>
+                            <td class='px-2 py-2'>{item.chaitra}</td>
+                            <td class='px-2 py-2'>{item.baisakh}</td>
+                            <td class='px-2 py-2'>{item.jestha}</td>
+                            <td class='px-2 py-2'>{item.ashar}</td>
+                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                              {grandTotal}
+                            </td>
+                          </>
+                        );
+                      })}
+                    </tr>
+                  </tfoot>
+                </table>
+
+                {/* table for download */}
+
                 <table
                   id='table-to-xls'
-                  class='mb-5 w-full text-sm text-left text-gray-700 dark:text-gray-400'
+                  class='hidden mb-5 w-full text-sm text-left text-gray-700 dark:text-gray-400'
                 >
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
@@ -135,28 +300,22 @@ const SingleForm1Detail = ({
                       <th scope='col' class='w-[5%] px-2 py-2'>
                         असार
                       </th>
-                      <th scope='col' class='w-[5%] px-2 py-2'>
+                      <th
+                        scope='col'
+                        class='border-l-2 border-l-gray-400 w-[5%] px-2 py-2'
+                      >
                         हालसम्मको जम्मा
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {body} */}
                     {attributes.collection.map((collectiondata) => {
                       const month = collectiondata.months;
+
                       const { id, ...onlyMonths } = month;
-                      const total = Object.values(onlyMonths).reduce(
+                      const rowTotal = Object.values(onlyMonths).reduce(
                         (t, n) => t + n
                       );
-
-                      let result = attributes.collection.map(
-                        (a) => a.months.shrawan
-                      );
-
-                      const total2 = result.reduce((t, n) => t + n);
-                      useEffect(() => {
-                        settotal2(total2);
-                      }, []);
 
                       return (
                         <>
@@ -200,16 +359,41 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>
                               {collectiondata.months.ashar}
                             </td>
-                            <td class='px-6 py-2'>{total}</td>
+                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                              {rowTotal}
+                            </td>
                           </tr>
                         </>
                       );
                     })}
-                    <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
-                      <td class='font-bold px-2 py-2 '>जम्मा</td>
-                      <td class='px-2 py-2'>{total2}</td>
-                    </tr>
                   </tbody>
+
+                  <tfoot>
+                    <tr class='border-b-2 border-t-2 border-t-gray-400 border-b-gray-400 dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
+                      <td class='font-bold px-2 py-2 '>जम्मा</td>
+                      {columnTotal.map((item) => {
+                        return (
+                          <>
+                            <td class='px-2 py-2'>{item.shrawan}</td>
+                            <td class='px-2 py-2'>{item.bhadra}</td>
+                            <td class='px-2 py-2'>{item.ashwin}</td>
+                            <td class='px-2 py-2'>{item.kartik}</td>
+                            <td class='px-2 py-2'>{item.mangsir}</td>
+                            <td class='px-2 py-2'>{item.poush}</td>
+                            <td class='px-2 py-2'>{item.magh}</td>
+                            <td class='px-2 py-2'>{item.falgun}</td>
+                            <td class='px-2 py-2'>{item.chaitra}</td>
+                            <td class='px-2 py-2'>{item.baisakh}</td>
+                            <td class='px-2 py-2'>{item.jestha}</td>
+                            <td class='px-2 py-2'>{item.ashar}</td>
+                            <td class='border-l-2 border-l-gray-400  px-6 py-2'>
+                              {grandTotal}
+                            </td>
+                          </>
+                        );
+                      })}
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>

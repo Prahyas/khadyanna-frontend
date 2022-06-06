@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
+import { data } from 'autoprefixer';
 
 const Form1 = () => {
   const navigate = useNavigate();
@@ -184,6 +185,10 @@ const Form1 = () => {
     });
   };
 
+  useEffect(() => {
+    console.log('form1Inputs', form1Inputs);
+  }, [form1Inputs]);
+
   return (
     <>
       <div className='mb-2'>
@@ -192,8 +197,34 @@ const Form1 = () => {
       <hr className='mb-5' />
       <form>
         <div className='flex flex-wrap md:flex-row flex-col'>
-          <div className='mr-5 mb-6 '>
-            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+          <div className='mr-5 mb-6 md:w-[25%]  '>
+            <label className=' block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              कार्यालय
+            </label>
+            <select
+              name='karyalaya'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              required
+              value={form1Inputs.karyalaya}
+              onChange={(e) =>
+                setform1Inputs({
+                  ...form1Inputs,
+                  karyalaya: e.target.value,
+                })
+              }
+            >
+              <option value='' selected disabled>
+                एउटा छान्नुहोस्
+              </option>
+              <option value='PS'>PS</option>
+              <option value='FFSQRD'>FFSQRD</option>
+              <option value='NFFRL'>NFFRL</option>
+              <option value='FTDND'>FTDND</option>
+              <option value='FTQCO'>FTQCO</option>
+              <option value='FIEQCO'>FIEQCO</option>
+              <option value='FTQCDO'>FTQCDO</option>
+            </select>
+            {/* <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               कार्यालय
             </label>
             <input
@@ -209,7 +240,7 @@ const Form1 = () => {
                 })
               }
               required
-            />
+            /> */}
           </div>
           <div className='mr-5 mb-6'>
             <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>

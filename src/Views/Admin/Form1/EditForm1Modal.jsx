@@ -157,15 +157,14 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
           <div class='p-6 space-y-6'>
             <form>
               <div className='flex flex-wrap md:flex-row flex-col'>
-                <div className='mr-5 mb-6 '>
-                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                <div className='mr-5 mb-6 md:w-[25%]  '>
+                  <label className=' block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                     कार्यालय
                   </label>
-                  <input
-                    type='text'
-                    id='text'
+                  <select
+                    name='karyalaya'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    placeholder='कार्यालय'
+                    required
                     value={form1Inputs.karyalaya}
                     onChange={(e) =>
                       setform1Inputs({
@@ -173,9 +172,21 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         karyalaya: e.target.value,
                       })
                     }
-                    required
-                  />
+                  >
+                    <option value='' selected disabled>
+                      एउटा छान्नुहोस्
+                    </option>
+                    <option value='PS'>PS</option>
+                    <option value='FFSQRD'>FFSQRD</option>
+                    <option value='NFFRL'>NFFRL</option>
+                    <option value='FTDND'>FTDND</option>
+                    <option value='FTQCO'>FTQCO</option>
+
+                    <option value='FIEQCO'>FIEQCO</option>
+                    <option value='FTQCDO'>FTQCDO</option>
+                  </select>
                 </div>
+
                 <div className='mr-5 mb-6'>
                   <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                     आ . ब
@@ -215,19 +226,6 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                     }}
                     options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                   />
-                  {/* <input
-              type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='आर्थिक बर्ष'
-              value={form1Inputs.date}
-              onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
-                  date: e.target.value,
-                })
-              }
-              required
-            /> */}
                 </div>
               </div>
 
@@ -542,22 +540,38 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                   );
                 })}
               </div>
-
-              <button
-                type='button'
-                onClick={() => {
-                  onSubmit(form1id);
-                }}
-                className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                disabled={
-                  !form1Inputs.karyalaya ||
-                  !form1Inputs.aawo ||
-                  form1Inputs.date === '' ||
-                  inputFields.khadyanna == ''
-                }
-              >
-                पेश गर्नुहोस्
-              </button>
+              <div>
+                <button
+                  type='button'
+                  onClick={() => {
+                    onSubmit(form1id);
+                  }}
+                  className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                  disabled={
+                    !form1Inputs.karyalaya ||
+                    !form1Inputs.aawo ||
+                    form1Inputs.date === '' ||
+                    inputFields.khadyanna == ''
+                  }
+                >
+                  पेश गर्नुहोस्
+                </button>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setEditModal(false);
+                  }}
+                  className=' disabled:opacity-75 disabled:cursor-not-allowed bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                  disabled={
+                    !form1Inputs.karyalaya ||
+                    !form1Inputs.aawo ||
+                    form1Inputs.date === '' ||
+                    inputFields.khadyanna == ''
+                  }
+                >
+                  रद्द
+                </button>
+              </div>
               <ToastContainer />
             </form>
           </div>
