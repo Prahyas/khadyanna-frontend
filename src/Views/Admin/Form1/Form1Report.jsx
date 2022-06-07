@@ -129,9 +129,9 @@ const Form1Report = () => {
                 </div>
 
                 <div class='p-6'>
-                  <div className=' mb-8 flex text-center justify-between items-center'>
+                  <div className='mb-8 flex text-center justify-between items-center'>
                     <div class=' text-md dark:text-white'>मिति छान्नुहोस् </div>
-                    <button
+                    {/* <button
                       onClick={() => {
                         setserchDate1(initialDate1);
                         setserchDate2(initialDate2);
@@ -139,7 +139,7 @@ const Form1Report = () => {
                       className=' text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-small rounded-lg text-sm sm:w-auto px-3 py-1.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
                     >
                       रिसेट् गर्नुहोस्
-                    </button>
+                    </button> */}
                   </div>
 
                   <div class='h-full md:flex md:justify-center md:items-center  '>
