@@ -233,7 +233,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
             <div className='mb-6'>
               <div className='flex justify-between items-center mb-2'>
                 <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                  महिना
+                  महिना अनुसार डेटा हल्नुहोस्
                 </label>
                 <button
                   type='button'
@@ -342,6 +342,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='shrawan'
@@ -356,6 +357,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='bhadra'
@@ -370,6 +372,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashwin'
@@ -385,6 +388,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='kartik'
@@ -399,6 +403,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='mangsir'
@@ -413,6 +418,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='poush'
@@ -428,6 +434,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='magh'
@@ -442,6 +449,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='falgun'
@@ -456,6 +464,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='chaitra'
@@ -471,6 +480,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='baisakh'
@@ -485,6 +495,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='jestha'
@@ -499,6 +510,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </label>
                         <input
                           type='number'
+                          min={0}
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashar'

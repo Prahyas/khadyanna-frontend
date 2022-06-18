@@ -7,70 +7,71 @@ import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
+const EditForm5Modal = ({ editModal, setEditModal, form5id, attributes }) => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { fetchform3Function } = useContext(DataContext);
-  const { fetchform3 } = fetchform3Function;
+  const { fetchform5Function } = useContext(DataContext);
+  const { fetchform5 } = fetchform5Function;
   const [inputFields, setInputFields] = useState([
-    ...attributes.form3collection,
+    ...attributes.form5collection,
   ]);
   const initialFormState = {
     date: attributes.date,
     timecode: parseInt(attributes.timecode),
     arthikbarsha: attributes.arthikbarsha,
     karyalaya: attributes.karyalaya,
-    saptaha: attributes.saptaha,
-    form3collection: attributes.form3collection,
+    form5collection: attributes.form5collection,
   };
 
-  const [form3Inputs, setform3Inputs] = useState(initialFormState);
+  const [form5Inputs, setform5Inputs] = useState(initialFormState);
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
     if (event.target.name === 'bibaran') {
       values[index].bibaran = event.target.value;
     } else if (event.target.name === 'shrawan') {
-      values[index].form3months.shrawan = event.target.value;
+      values[index].form5months.shrawan = event.target.value;
     } else if (event.target.name === 'bhadra') {
-      values[index].form3months.bhadra = event.target.value;
+      values[index].form5months.bhadra = event.target.value;
     } else if (event.target.name === 'ashwin') {
-      values[index].form3months.ashwin = event.target.value;
+      values[index].form5months.ashwin = event.target.value;
     } else if (event.target.name === 'kartik') {
-      values[index].form3months.kartik = event.target.value;
+      values[index].form5months.kartik = event.target.value;
     } else if (event.target.name === 'mangsir') {
-      values[index].form3months.mangsir = event.target.value;
+      values[index].form5months.mangsir = event.target.value;
     } else if (event.target.name === 'poush') {
-      values[index].form3months.poush = event.target.value;
+      values[index].form5months.poush = event.target.value;
     } else if (event.target.name === 'magh') {
-      values[index].form3months.magh = event.target.value;
+      values[index].form5months.magh = event.target.value;
     } else if (event.target.name === 'falgun') {
-      values[index].form3months.falgun = event.target.value;
+      values[index].form5months.falgun = event.target.value;
     } else if (event.target.name === 'chaitra') {
-      values[index].form3months.chaitra = event.target.value;
+      values[index].form5months.chaitra = event.target.value;
     } else if (event.target.name === 'baisakh') {
-      values[index].form3months.baisakh = event.target.value;
+      values[index].form5months.baisakh = event.target.value;
     } else if (event.target.name === 'jestha') {
-      values[index].form3months.jestha = event.target.value;
+      values[index].form5months.jestha = event.target.value;
     } else if (event.target.name === 'ashar') {
-      values[index].form3months.ashar = event.target.value;
-    } else if (event.target.name === 'sankhya') {
-      values[index].form3months.sankhya = event.target.value;
-    } else if (event.target.name === 'patak') {
-      values[index].form3months.patak = event.target.value;
+      values[index].form5months.ashar = event.target.value;
+    } else if (event.target.name === 'chaumasikpragati') {
+      values[index].form5months.chaumasikpragati = event.target.value;
+    } else if (event.target.name === 'arthikbarshapragati') {
+      values[index].form5months.arthikbarshapragati = event.target.value;
+    } else if (event.target.name === 'bigatbarshapragati') {
+      values[index].form5months.bigatbarshapragati = event.target.value;
     } else {
-      values[index].form3months.kaifiyat = event.target.value;
+      values[index].form5months.kaifiyat = event.target.value;
     }
 
     setInputFields(values);
-    setform3Inputs({ ...form3Inputs, form3collection: values });
+    setform5Inputs({ ...form5Inputs, form5collection: values });
   };
 
   const handleAddFields = () => {
     const values = [...inputFields];
     values.push({
       bibaran: '',
-      form3months: {
+      form5months: {
         shrawan: 0,
         bhadra: 0,
         ashwin: 0,
@@ -83,13 +84,14 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
         baisakh: 0,
         jestha: 0,
         ashar: 0,
-        sankhya: 0,
-        patak: 0,
+        chaumasikpragati: 0,
+        arthikbarshapragati: 0,
+        bigatbarshapragati: 0,
         kaifiyat: '',
       },
     });
     setInputFields(values);
-    setform3Inputs({ ...form3Inputs, form3months: values });
+    setform5Inputs({ ...form5Inputs, form5months: values });
   };
 
   const handleRemoveFields = (index) => {
@@ -98,7 +100,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
       values.splice(index, 1);
     }
     setInputFields(values);
-    setform3Inputs({ ...form3Inputs, form3months: values });
+    setform5Inputs({ ...form5Inputs, form5months: values });
   };
 
   const successNotification = () =>
@@ -124,14 +126,14 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
     });
   };
 
-  const onSubmit = async (form3id) => {
+  const onSubmit = async (form5id) => {
     try {
-      await axios.put(`${api}/api/form3s/${form3id}`, {
-        data: form3Inputs,
+      await axios.put(`${api}/api/form5s/${form5id}`, {
+        data: form5Inputs,
       });
-      setform3Inputs(initialFormState);
+      setform5Inputs(initialFormState);
       successNotification();
-      fetchform3();
+      fetchform5();
       setEditModal(false);
     } catch (error) {
       errorNotification(error);
@@ -144,7 +146,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
         <div className=' z-[3] w-full h-[15%] border-b-2 flex items-center p-5'>
           <div class='flex justify-between w-full'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-              निरीक्षण अनुगमन विवरण
+              होटल स्तरीकरण लोगो वितरण सम्बन्धि विवरण
             </h3>
             <button
               type='button'
@@ -177,10 +179,10 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                   name='karyalaya'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
-                  value={form3Inputs.karyalaya}
+                  value={form5Inputs.karyalaya}
                   onChange={(e) =>
-                    setform3Inputs({
-                      ...form3Inputs,
+                    setform5Inputs({
+                      ...form5Inputs,
                       karyalaya: e.target.value,
                     })
                   }
@@ -204,10 +206,10 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='कार्यालय'
-              value={form3Inputs.karyalaya}
+              value={form5Inputs.karyalaya}
               onChange={(e) =>
-                setform3Inputs({
-                  ...form3Inputs,
+                setform5Inputs({
+                  ...form5Inputs,
                   karyalaya: e.target.value,
                 })
               }
@@ -222,10 +224,10 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                   type='text'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder='आ . ब'
-                  value={form3Inputs.arthikbarsha}
+                  value={form5Inputs.arthikbarsha}
                   onChange={(e) =>
-                    setform3Inputs({
-                      ...form3Inputs,
+                    setform5Inputs({
+                      ...form5Inputs,
                       arthikbarsha: e.target.value,
                     })
                   }
@@ -239,50 +241,19 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                 <NepaliDatePicker
                   inputClassName='form-control'
                   className='mb-6'
-                  value={form3Inputs.date}
+                  value={form5Inputs.date}
                   onChange={(value) => {
                     const adDate = bsToAd(value);
 
                     const newtimestamp = Date.parse(adDate);
 
-                    setform3Inputs({
-                      ...form3Inputs,
+                    setform5Inputs({
+                      ...form5Inputs,
                       date: value,
                       timecode: newtimestamp,
                     });
                   }}
                   options={{ calenderLocale: 'ne', valueLocale: 'en' }}
-                />
-                {/* <input
-              type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='आर्थिक बर्ष'
-              value={form3Inputs.date}
-              onChange={(e) =>
-                setform3Inputs({
-                  ...form3Inputs,
-                  date: e.target.value,
-                })
-              }
-              required
-            /> */}
-              </div>
-              <div className='mr-5 mb-6'>
-                <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                  सप्ताह
-                </label>
-                <input
-                  type='text'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                  placeholder='सप्ताह'
-                  value={form3Inputs.saptaha}
-                  onChange={(e) =>
-                    setform3Inputs({
-                      ...form3Inputs,
-                      saptaha: e.target.value,
-                    })
-                  }
-                  required
                 />
               </div>
             </div>
@@ -331,15 +302,13 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                         <option value='' selected disabled>
                           एउटा छान्नुहोस्
                         </option>
-                        <option value='उद्योग'>उद्योग</option>
-                        <option value='पसल'>पसल</option>
-                        <option value='सुपरमार्केट'>सुपरमार्केट</option>
-                        <option value='गोदाम'>गोदाम</option>
-                        <option value='होटल, रेस्टुरेन्ट, मिठाई पसल आदी '>
-                          होटल, रेस्टुरेन्ट, मिठाई पसल आदी{' '}
+                        <option value='अति उत्तम'>अति उत्तम </option>
+                        <option value='उत्तम'>उत्तम </option>
+                        <option value='सन्तोषजनक'>सन्तोषजनक</option>
+                        <option value='सामान्य'>सामान्य</option>
+                        <option value='स्तरीकरणमा नपरेको'>
+                          स्तरीकरणमा नपरेको
                         </option>
-                        <option value='दाना पदार्थ'>दाना पदार्थ</option>
-                        <option value='अन्य'>अन्य</option>
                       </select>
                       <button
                         type='button'
@@ -391,7 +360,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='shrawan'
-                          value={inputField.form3months.shrawan}
+                          value={inputField.form5months.shrawan}
                           placeholder='श्रावण'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -406,7 +375,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='bhadra'
-                          value={inputField.form3months.bhadra}
+                          value={inputField.form5months.bhadra}
                           placeholder='भदौ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -421,7 +390,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashwin'
-                          value={inputField.form3months.ashwin}
+                          value={inputField.form5months.ashwin}
                           placeholder='आश्विन'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -436,7 +405,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='kartik'
-                          value={inputField.form3months.kartik}
+                          value={inputField.form5months.kartik}
                           placeholder='कार्तिक'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -451,7 +420,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='mangsir'
-                          value={inputField.form3months.mangsir}
+                          value={inputField.form5months.mangsir}
                           placeholder='मंसिर'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -466,7 +435,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='poush'
-                          value={inputField.form3months.poush}
+                          value={inputField.form5months.poush}
                           placeholder='पुष'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -482,7 +451,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='magh'
-                          value={inputField.form3months.magh}
+                          value={inputField.form5months.magh}
                           placeholder='माघ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -497,7 +466,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='falgun'
-                          value={inputField.form3months.falgun}
+                          value={inputField.form5months.falgun}
                           placeholder='फाल्गुन'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -512,7 +481,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='chaitra'
-                          value={inputField.form3months.chaitra}
+                          value={inputField.form5months.chaitra}
                           placeholder='चैत्र'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -528,7 +497,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='baisakh'
-                          value={inputField.form3months.baisakh}
+                          value={inputField.form5months.baisakh}
                           placeholder='बैशाख'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -543,7 +512,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='jestha'
-                          value={inputField.form3months.jestha}
+                          value={inputField.form5months.jestha}
                           placeholder='जेठ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -558,7 +527,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashar'
-                          value={inputField.form3months.ashar}
+                          value={inputField.form5months.ashar}
                           placeholder='असार'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -567,15 +536,15 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                     <div className='flex flex-wrap md:flex-row flex-col'>
                       <div className='mr-5 mb-6'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          पटक
+                          महिना, चौमासिक प्रगति
                         </label>
                         <input
                           type='number'
                           min={0}
-                          name='patak'
+                          name='chaumasikpragati'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           placeholder='पटक'
-                          value={inputField.form3months.patak}
+                          value={inputField.form5months.chaumasikpragati}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
@@ -583,15 +552,30 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
 
                       <div className='mr-5 mb-6'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          संख्या
+                          यस आ ब को हालसम्मको प्रगति
                         </label>
                         <input
                           type='number'
                           min={0}
-                          name='sankhya'
+                          name='arthikbarshapragati'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           placeholder='संख्या'
-                          value={inputField.form3months.sankhya}
+                          value={inputField.form5months.arthikbarshapragati}
+                          onChange={(event) => handleInputChange(index, event)}
+                          required
+                        />
+                      </div>
+                      <div className='mr-5 mb-6'>
+                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                          बिगत बर्षहरुदेखि हालसम्मको प्रगति
+                        </label>
+                        <input
+                          type='number'
+                          min={0}
+                          name='bigatbarshapragati'
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                          placeholder='संख्या'
+                          value={inputField.form5months.bigatbarshapragati}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
@@ -605,7 +589,7 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
                           name='kaifiyat'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           placeholder='कैफियत'
-                          value={inputField.form3months.kaifiyat}
+                          value={inputField.form5months.kaifiyat}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
@@ -624,13 +608,13 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
             <button
               type='button'
               onClick={() => {
-                onSubmit(form3id);
+                onSubmit(form5id);
               }}
               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               disabled={
-                !form3Inputs.karyalaya ||
-                !form3Inputs.arthikbarsha ||
-                form3Inputs.date === '' ||
+                !form5Inputs.karyalaya ||
+                !form5Inputs.arthikbarsha ||
+                form5Inputs.date === '' ||
                 inputFields.khadyanna == ''
               }
             >
@@ -652,4 +636,4 @@ const EditForm3Modal = ({ editModal, setEditModal, form3id, attributes }) => {
   );
 };
 
-export default EditForm3Modal;
+export default EditForm5Modal;

@@ -13,6 +13,8 @@ import NotFound from '../Components/NotFound';
 import NoAuthorization from '../Views/Admin/NoAuthorization';
 import Form3 from '../Views/Admin/Form3/Form3';
 import Form3Report from '../Views/Admin/Form3/Form3Report';
+import Form5 from '../Views/Admin/Form5/Form5';
+import Form5Report from '../Views/Admin/Form5/Form5Report';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
@@ -72,7 +74,7 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'FFSQRD' ? (
+                {currentUser.user.department === 'PS' ? (
                   <>
                     <Route path='form3' element={<Form3 />} />
                     <Route path='form3report' element={<Form3Report />} />
@@ -90,6 +92,33 @@ const Admin = () => {
                     />
                     <Route
                       path='form3report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                {currentUser.user.department === 'PS' ? (
+                  <>
+                    <Route path='form5' element={<Form5 />} />
+                    <Route path='form5report' element={<Form5Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form5'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form5report'
                       element={
                         <NoAuthorization
                           errorTitle={`माफ गर्नुहोला!`}

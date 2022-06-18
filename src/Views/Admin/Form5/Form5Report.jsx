@@ -3,21 +3,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SingleForm3Detail from './SingleForm3Detail';
-import EditForm3Modal from './EditForm3Modal';
+import SingleForm5Detail from './SingleForm5Detail';
+import EditForm5Modal from './EditForm5Modal';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const Form3Report = () => {
+const Form5Report = () => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { form3Data } = useContext(DataContext);
-  const [form3, setform3] = form3Data;
-  const { fetchform3Function } = useContext(DataContext);
-  const { fetchform3 } = fetchform3Function;
+  const { form5Data } = useContext(DataContext);
+  const [form5, setform5] = form5Data;
+  const { fetchform5Function } = useContext(DataContext);
+  const { fetchform5 } = fetchform5Function;
   const [editModal, setEditModal] = useState(false);
-  const [selectedForm3, setselectedForm3] = useState(null);
+  const [selectedForm5, setselectedForm5] = useState(null);
   const [reportModal, setreportModal] = useState(false);
   const initialDate1 = {
     date1: '',
@@ -31,20 +31,20 @@ const Form3Report = () => {
   const [searchDate2, setserchDate2] = useState(initialDate2);
   const [filterModal, setfilterModal] = useState(false);
 
-  const deleteForm3 = async (form3id) => {
+  const deleteForm5 = async (form5id) => {
     await axios
-      .delete(`${api}/api/form3s/${form3id}`)
+      .delete(`${api}/api/form5s/${form5id}`)
       .then((response) => {
         deleteNotification();
-        fetchform3();
+        fetchform5();
       })
       .catch((error) => {
         errorNotification();
       });
   };
 
-  const editRow = (form3) => {
-    setselectedForm3(form3);
+  const editRow = (form5) => {
+    setselectedForm5(form5);
   };
 
   const deleteNotification = () =>
@@ -73,7 +73,10 @@ const Form3Report = () => {
   return (
     <>
       <div className='flex justify-between items-center mb-2'>
-        <p class='text-sm md:text-2xl'>निरीक्षण अनुगमन विवरण रिपोर्ट</p>
+        <p class='text-sm md:text-2xl'>
+          {' '}
+          होटल स्तरीकरण लोगो वितरण सम्बन्धि विवरण रिपोर्ट
+        </p>
         <div className='flex'>
           <button
             onClick={() => {
@@ -211,9 +214,6 @@ const Form3Report = () => {
               <th scope='col' class='w-[25%] px-6 py-3'>
                 मिति
               </th>
-              <th scope='col' class='w-[25%] px-6 py-3'>
-                सप्ताह
-              </th>
 
               <th scope='col' class='w-[15%] px-6 py-3'>
                 <span class='sr-only'>Edit</span>
@@ -226,36 +226,35 @@ const Form3Report = () => {
           searchDate2.timestamp2 ? (
             <>
               <tbody>
-                {form3
+                {form5
                   .filter(
-                    (form3) =>
-                      form3.attributes.timecode >= searchDate1.timestamp1 &&
-                      form3.attributes.timecode <= searchDate2.timestamp2
+                    (form5) =>
+                      form5.attributes.timecode >= searchDate1.timestamp1 &&
+                      form5.attributes.timecode <= searchDate2.timestamp2
                   )
-                  .map((form3) => {
+                  .map((form5) => {
                     return (
                       <tr
-                        key={form3.id}
+                        key={form5.id}
                         class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                       >
                         <th
                           scope='row'
                           class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                         >
-                          {form3.attributes.karyalaya}
+                          {form5.attributes.karyalaya}
                         </th>
 
                         <td class='px-6 py-4'>
-                          {form3.attributes.arthikbarsha}
+                          {form5.attributes.arthikbarsha}
                         </td>
-                        <td class='px-6 py-4'>{form3.attributes.date} </td>
-                        <td class='px-6 py-4'>{form3.attributes.saptaha} </td>
+                        <td class='px-6 py-4'>{form5.attributes.date} </td>
 
                         <td class='flex px-6 py-4'>
                           <a
                             onClick={() => {
                               setEditModal(true);
-                              editRow(form3);
+                              editRow(form5);
                             }}
                             class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                           >
@@ -275,7 +274,7 @@ const Form3Report = () => {
                           </a>
 
                           <a
-                            onClick={() => deleteForm3(form3.id)}
+                            onClick={() => deleteForm5(form5.id)}
                             class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                           >
                             <svg
@@ -294,7 +293,7 @@ const Form3Report = () => {
                           <a
                             onClick={() => {
                               setreportModal(true);
-                              editRow(form3);
+                              editRow(form5);
                             }}
                             class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                           >
@@ -313,22 +312,22 @@ const Form3Report = () => {
                             </svg>
                           </a>
                           {editModal ? (
-                            <EditForm3Modal
+                            <EditForm5Modal
                               editModal={editModal}
                               setEditModal={setEditModal}
-                              form3id={form3.id}
-                              attributes={selectedForm3.attributes}
+                              form5id={form5.id}
+                              attributes={selectedForm5.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
                           {reportModal ? (
-                            <SingleForm31Detail
+                            <SingleForm51Detail
                               reportModal={reportModal}
                               setreportModal={setreportModal}
-                              form3id={form3.id}
+                              form5id={form5.id}
                               // // detailId={detail.id}
-                              selectedForm3={selectedForm3}
-                              attributes={selectedForm3.attributes}
+                              selectedForm5={selectedForm5}
+                              attributes={selectedForm5.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
@@ -342,27 +341,27 @@ const Form3Report = () => {
           ) : (
             <>
               <tbody>
-                {form3.map((form3) => {
+                {form5.map((form5) => {
                   return (
                     <tr
-                      key={form3.id}
+                      key={form5.id}
                       class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                     >
                       <th
                         scope='row'
                         class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                       >
-                        {form3.attributes.karyalaya}
+                        {form5.attributes.karyalaya}
                       </th>
 
-                      <td class='px-6 py-4'>{form3.attributes.arthikbarsha}</td>
-                      <td class='px-6 py-4'>{form3.attributes.date} </td>
-                      <td class='px-6 py-4'>{form3.attributes.saptaha} </td>
+                      <td class='px-6 py-4'>{form5.attributes.arthikbarsha}</td>
+                      <td class='px-6 py-4'>{form5.attributes.date} </td>
+
                       <td class='flex px-6 py-4'>
                         <a
                           onClick={() => {
                             setEditModal(true);
-                            editRow(form3);
+                            editRow(form5);
                           }}
                           class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                         >
@@ -382,7 +381,7 @@ const Form3Report = () => {
                         </a>
 
                         <a
-                          onClick={() => deleteForm3(form3.id)}
+                          onClick={() => deleteForm5(form5.id)}
                           class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                         >
                           <svg
@@ -401,7 +400,7 @@ const Form3Report = () => {
                         <a
                           onClick={() => {
                             setreportModal(true);
-                            editRow(form3);
+                            editRow(form5);
                           }}
                           class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                         >
@@ -420,22 +419,22 @@ const Form3Report = () => {
                           </svg>
                         </a>
                         {editModal ? (
-                          <EditForm3Modal
+                          <EditForm5Modal
                             editModal={editModal}
                             setEditModal={setEditModal}
-                            form3id={selectedForm3.id}
-                            attributes={selectedForm3.attributes}
+                            form5id={selectedForm5.id}
+                            attributes={selectedForm5.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
                         {reportModal ? (
-                          <SingleForm3Detail
+                          <SingleForm5Detail
                             reportModal={reportModal}
                             setreportModal={setreportModal}
-                            form3id={selectedForm3.id}
+                            form5id={selectedForm5.id}
                             // // detailId={detail.id}
-                            selectedForm3={selectedForm3}
-                            attributes={selectedForm3.attributes}
+                            selectedForm5={selectedForm5}
+                            attributes={selectedForm5.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
@@ -453,4 +452,4 @@ const Form3Report = () => {
   );
 };
 
-export default Form3Report;
+export default Form5Report;

@@ -435,6 +435,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='shrawan'
@@ -449,6 +450,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='bhadra'
@@ -463,6 +465,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='ashwin'
@@ -477,6 +480,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='kartik'
@@ -491,6 +495,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='mangsir'
@@ -505,6 +510,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='poush'
@@ -520,6 +526,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='magh'
@@ -534,6 +541,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='falgun'
@@ -548,6 +556,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='chaitra'
@@ -563,6 +572,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='baisakh'
@@ -577,6 +587,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='jestha'
@@ -591,6 +602,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='ashar'
@@ -607,6 +619,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       name='patak'
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       placeholder='पटक'
@@ -622,6 +635,7 @@ const Form3 = () => {
                     </label>
                     <input
                       type='number'
+                      min={0}
                       name='sankhya'
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       placeholder='संख्या'

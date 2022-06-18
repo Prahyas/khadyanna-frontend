@@ -8,6 +8,7 @@ export const DataProvider = (props) => {
   const [api, setapi] = useState('https://khadyaproject.herokuapp.com');
   const [form1, setform1] = useState([]);
   const [form3, setform3] = useState([]);
+  const [form5, setform5] = useState([]);
   const [currentUser, setcurrentUser] = useState(null);
 
   useEffect(() => {
@@ -49,10 +50,21 @@ export const DataProvider = (props) => {
       console.error(error.message);
     }
   };
+  const fetchform5 = async () => {
+    try {
+      const response = await axios.get(
+        `${api}/api/form5s?sort[0]=createdAt%3Adesc&populate[0]=form5collection&populate[1]=form5collection.form5months`
+      );
+      setform5(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     fetchform1();
     fetchform3();
+    fetchform5();
   }, []);
 
   return (
@@ -63,6 +75,8 @@ export const DataProvider = (props) => {
         fetchform1Function: { fetchform1 },
         form3Data: [form3, setform3],
         fetchform3Function: { fetchform3 },
+        form5Data: [form5, setform5],
+        fetchform5Function: { fetchform5 },
         currentUserData: [currentUser, setcurrentUser],
       }}
     >

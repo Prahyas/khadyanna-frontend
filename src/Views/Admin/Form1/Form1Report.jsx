@@ -73,7 +73,7 @@ const Form1Report = () => {
   return (
     <>
       <div className='flex justify-between items-center mb-2'>
-        <p class='text-2xl dark:text-white'>
+        <p class='text-sm md:text-2xl'>
           {' '}
           खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण रिपोर्ट
         </p>
