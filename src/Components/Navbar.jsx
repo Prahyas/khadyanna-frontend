@@ -21,7 +21,7 @@ const Navbar = ({ showNav, setshowNav }) => {
 
   return (
     <>
-      <nav className='flex justify-between px-5 items-center fixed lg:ml-[20%] h-[60px] border-b-2 bg-gray-200 shadow w-[100%] lg:w-[80%]'>
+      <nav className='z-[2] flex justify-between px-5 items-center fixed lg:ml-[20%] h-[60px] border-b-2 bg-gray-200 shadow w-[100%] lg:w-[80%]'>
         <div>
           <p className='hidden lg:block text-base dark:text-white'>
             {currentUser ? `${currentUser.user.username}` : `स्वागत छ! `}
@@ -54,7 +54,7 @@ const Navbar = ({ showNav, setshowNav }) => {
           <div
             className={`${
               dropdown ? 'block' : 'hidden'
-            } fixed top-14 right-4 z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
+            } fixed top-14 right-4 z-[2] w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
           >
             {/* <ul className='py-1' aria-labelledby='dropdownDividerButton'>
               <li>

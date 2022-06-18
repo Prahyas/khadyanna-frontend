@@ -10,14 +10,14 @@ import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 import { data } from 'autoprefixer';
 
-const Form1 = () => {
+const Form3 = () => {
   const navigate = useNavigate();
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
     {
-      khadyanna: '',
-      months: {
+      bibaran: '',
+      form3months: {
         shrawan: 0,
         bhadra: 0,
         ashwin: 0,
@@ -30,6 +30,9 @@ const Form1 = () => {
         baisakh: 0,
         jestha: 0,
         ashar: 0,
+        sankhya: 0,
+        patak: 0,
+        kaifiyat: '',
       },
     },
   ]);
@@ -38,10 +41,11 @@ const Form1 = () => {
     timecode: '',
     arthikbarsha: '',
     karyalaya: '',
-    collection: [
+    saptaha: '',
+    form3collection: [
       {
-        khadyanna: '',
-        months: {
+        bibaran: '',
+        form3months: {
           shrawan: 0,
           bhadra: 0,
           ashwin: 0,
@@ -54,54 +58,63 @@ const Form1 = () => {
           baisakh: 0,
           jestha: 0,
           ashar: 0,
+          sankhya: 0,
+          patak: 0,
+          kaifiyat: '',
         },
       },
     ],
   };
 
-  const [form1Inputs, setform1Inputs] = useState(initialFormState);
-  const { fetchform1Function } = useContext(DataContext);
-  const { fetchform1 } = fetchform1Function;
+  const [form3Inputs, setform3Inputs] = useState(initialFormState);
+  const { fetchform3Function } = useContext(DataContext);
+  const { fetchform3 } = fetchform3Function;
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
-    if (event.target.name === 'khadyanna') {
-      values[index].khadyanna = event.target.value;
+    if (event.target.name === 'bibaran') {
+      values[index].bibaran = event.target.value;
     } else if (event.target.name === 'shrawan') {
-      values[index].months.shrawan = event.target.value;
+      values[index].form3months.shrawan = event.target.value;
     } else if (event.target.name === 'bhadra') {
-      values[index].months.bhadra = event.target.value;
+      values[index].form3months.bhadra = event.target.value;
     } else if (event.target.name === 'ashwin') {
-      values[index].months.ashwin = event.target.value;
+      values[index].form3months.ashwin = event.target.value;
     } else if (event.target.name === 'kartik') {
-      values[index].months.kartik = event.target.value;
+      values[index].form3months.kartik = event.target.value;
     } else if (event.target.name === 'mangsir') {
-      values[index].months.mangsir = event.target.value;
+      values[index].form3months.mangsir = event.target.value;
     } else if (event.target.name === 'poush') {
-      values[index].months.poush = event.target.value;
+      values[index].form3months.poush = event.target.value;
     } else if (event.target.name === 'magh') {
-      values[index].months.magh = event.target.value;
+      values[index].form3months.magh = event.target.value;
     } else if (event.target.name === 'falgun') {
-      values[index].months.falgun = event.target.value;
+      values[index].form3months.falgun = event.target.value;
     } else if (event.target.name === 'chaitra') {
-      values[index].months.chaitra = event.target.value;
+      values[index].form3months.chaitra = event.target.value;
     } else if (event.target.name === 'baisakh') {
-      values[index].months.baisakh = event.target.value;
+      values[index].form3months.baisakh = event.target.value;
     } else if (event.target.name === 'jestha') {
-      values[index].months.jestha = event.target.value;
+      values[index].form3months.jestha = event.target.value;
+    } else if (event.target.name === 'ashar') {
+      values[index].form3months.ashar = event.target.value;
+    } else if (event.target.name === 'sankhya') {
+      values[index].form3months.sankhya = event.target.value;
+    } else if (event.target.name === 'patak') {
+      values[index].form3months.patak = event.target.value;
     } else {
-      values[index].months.ashar = event.target.value;
+      values[index].form3months.kaifiyat = event.target.value;
     }
 
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, collection: values });
+    setform3Inputs({ ...form3Inputs, form3collection: values });
   };
 
   const handleAddFields = () => {
     const values = [...inputFields];
     values.push({
-      khadyanna: '',
-      months: {
+      bibaran: '',
+      form3months: {
         shrawan: 0,
         bhadra: 0,
         ashwin: 0,
@@ -114,31 +127,34 @@ const Form1 = () => {
         baisakh: 0,
         jestha: 0,
         ashar: 0,
+        sankhya: 0,
+        patak: 0,
+        kaifiyat: '',
       },
     });
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, months: values });
+    setform3Inputs({ ...form3Inputs, form3months: values });
   };
 
   const handleRemoveFields = (index) => {
     const values = [...inputFields];
     values.splice(index, 1);
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, months: values });
+    setform3Inputs({ ...form3Inputs, form3months: values });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post(`${api}/api/form1s`, {
-        data: form1Inputs,
+      .post(`${api}/api/form3s`, {
+        data: form3Inputs,
       })
       .then((response) => {
-        setform1Inputs(initialFormState);
+        setform3Inputs(initialFormState);
         setInputFields([
           {
-            khadyanna: '',
-            months: {
+            bibaran: '',
+            form3months: {
               shrawan: '',
               bhadra: '',
               ashwin: '',
@@ -151,14 +167,18 @@ const Form1 = () => {
               baisakh: '',
               jestha: '',
               ashar: '',
+              sankhya: '',
+              patak: '',
+              kaifiyat: '',
             },
           },
         ]);
         successNotification();
-        fetchform1();
+        fetchform3();
       })
       .catch((error) => {
         errorNotification();
+        console.log(error);
       });
   };
 
@@ -186,16 +206,13 @@ const Form1 = () => {
   };
 
   useEffect(() => {
-    console.log('form1Inputs', form1Inputs);
-  }, [form1Inputs]);
+    console.log('form3Inputs', form3Inputs);
+  }, [form3Inputs]);
 
   return (
     <>
       <div className='mb-2'>
-        <p className='text-2xl dark:text-white'>
-          {' '}
-          खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण{' '}
-        </p>
+        <p className='text-2xl dark:text-white'> निरीक्षण अनुगमन विवरण </p>
       </div>
       <hr className='mb-5' />
       <form>
@@ -208,10 +225,10 @@ const Form1 = () => {
               name='karyalaya'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               required
-              value={form1Inputs.karyalaya}
+              value={form3Inputs.karyalaya}
               onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
+                setform3Inputs({
+                  ...form3Inputs,
                   karyalaya: e.target.value,
                 })
               }
@@ -235,10 +252,10 @@ const Form1 = () => {
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='कार्यालय'
-              value={form1Inputs.karyalaya}
+              value={form3Inputs.karyalaya}
               onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
+                setform3Inputs({
+                  ...form3Inputs,
                   karyalaya: e.target.value,
                 })
               }
@@ -253,10 +270,10 @@ const Form1 = () => {
               type='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='आ . ब'
-              value={form1Inputs.arthikbarsha}
+              value={form3Inputs.arthikbarsha}
               onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
+                setform3Inputs({
+                  ...form3Inputs,
                   arthikbarsha: e.target.value,
                 })
               }
@@ -270,14 +287,14 @@ const Form1 = () => {
             <NepaliDatePicker
               inputClassName='form-control'
               className='mb-6'
-              value={form1Inputs.date}
+              value={form3Inputs.date}
               onChange={(value) => {
                 const adDate = bsToAd(value);
 
                 const newtimestamp = Date.parse(adDate);
 
-                setform1Inputs({
-                  ...form1Inputs,
+                setform3Inputs({
+                  ...form3Inputs,
                   date: value,
                   timecode: newtimestamp,
                 });
@@ -288,15 +305,33 @@ const Form1 = () => {
               type='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='आर्थिक बर्ष'
-              value={form1Inputs.date}
+              value={form3Inputs.date}
               onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
+                setform3Inputs({
+                  ...form3Inputs,
                   date: e.target.value,
                 })
               }
               required
             /> */}
+          </div>
+          <div className='mr-5 mb-6'>
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              सप्ताह
+            </label>
+            <input
+              type='text'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              placeholder='सप्ताह'
+              value={form3Inputs.saptaha}
+              onChange={(e) =>
+                setform3Inputs({
+                  ...form3Inputs,
+                  saptaha: e.target.value,
+                })
+              }
+              required
+            />
           </div>
         </div>
 
@@ -335,34 +370,23 @@ const Form1 = () => {
                 <div className='flex mb-3'>
                   <select
                     id='countries'
-                    name='khadyanna'
+                    name='bibaran'
                     className='mr-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     required
-                    value={inputField.khadyanna}
+                    value={inputField.bibaran}
                     onChange={(event) => handleInputChange(index, event)}
                   >
                     <option value='' selected disabled>
                       एउटा छान्नुहोस्
                     </option>
-                    <option value='दुध तथा दुध पदार्थ'>
-                      दुध तथा दुध पदार्थ
+                    <option value='उद्योग'>उद्योग</option>
+                    <option value='पसल'>पसल</option>
+                    <option value='सुपरमार्केट'>सुपरमार्केट</option>
+                    <option value='गोदाम'>गोदाम</option>
+                    <option value='होटल, रेस्टुरेन्ट, मिठाई पसल आदी '>
+                      होटल, रेस्टुरेन्ट, मिठाई पसल आदी{' '}
                     </option>
-                    <option value='तेल तथा घेउ जन्य'>तेल तथा घेउ जन्य</option>
-                    <option value='फल तथा सागपात'>फल तथा सागपात</option>
-                    <option value='मसला'>मसला</option>
-                    <option value='चिया, कफि'>चिया, कफि</option>
-                    <option value='नुन'>नुन</option>
-                    <option value='खाद्यान्न दलहन र सोबाट बनेको'>
-                      खाद्यान्न दलहन र सोबाट बनेको
-                    </option>
-                    <option value='प्र. पिउने पानी'>प्र. पिउने पानी</option>
-                    <option value='गुलियो पदार्थ'>गुलियो पदार्थ</option>
-                    <option value='कन्फेक्सनरी'>कन्फेक्सनरी</option>
-                    <option value=' मासु तथा मासुजन्य'>
-                      मासु तथा मासुजन्य
-                    </option>
-                    <option value='दाना'>दाना</option>
-
+                    <option value='दाना पदार्थ'>दाना पदार्थ</option>
                     <option value='अन्य'>अन्य</option>
                   </select>
                   <button
@@ -414,7 +438,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='shrawan'
-                      value={inputField.months.shrawan}
+                      value={inputField.form3months.shrawan}
                       placeholder='श्रावण'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -428,7 +452,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='bhadra'
-                      value={inputField.months.bhadra}
+                      value={inputField.form3months.bhadra}
                       placeholder='भदौ'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -442,7 +466,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='ashwin'
-                      value={inputField.months.ashwin}
+                      value={inputField.form3months.ashwin}
                       placeholder='आश्विन'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -456,7 +480,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='kartik'
-                      value={inputField.months.kartik}
+                      value={inputField.form3months.kartik}
                       placeholder='कार्तिक'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -470,7 +494,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='mangsir'
-                      value={inputField.months.mangsir}
+                      value={inputField.form3months.mangsir}
                       placeholder='मंसिर'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -484,7 +508,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='poush'
-                      value={inputField.months.poush}
+                      value={inputField.form3months.poush}
                       placeholder='पुष'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -499,7 +523,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='magh'
-                      value={inputField.months.magh}
+                      value={inputField.form3months.magh}
                       placeholder='माघ'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -513,7 +537,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='falgun'
-                      value={inputField.months.falgun}
+                      value={inputField.form3months.falgun}
                       placeholder='फाल्गुन'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -527,7 +551,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='chaitra'
-                      value={inputField.months.chaitra}
+                      value={inputField.form3months.chaitra}
                       placeholder='चैत्र'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -542,7 +566,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='baisakh'
-                      value={inputField.months.baisakh}
+                      value={inputField.form3months.baisakh}
                       placeholder='बैशाख'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -556,7 +580,7 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='jestha'
-                      value={inputField.months.jestha}
+                      value={inputField.form3months.jestha}
                       placeholder='जेठ'
                       onChange={(event) => handleInputChange(index, event)}
                     />
@@ -570,9 +594,54 @@ const Form1 = () => {
                       className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       required
                       name='ashar'
-                      value={inputField.months.ashar}
+                      value={inputField.form3months.ashar}
                       placeholder='असार'
                       onChange={(event) => handleInputChange(index, event)}
+                    />
+                  </div>
+                </div>
+                <div className='flex flex-wrap md:flex-row flex-col'>
+                  <div className='mr-5 mb-6'>
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                      पटक
+                    </label>
+                    <input
+                      type='number'
+                      name='patak'
+                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                      placeholder='पटक'
+                      value={inputField.form3months.patak}
+                      onChange={(event) => handleInputChange(index, event)}
+                      required
+                    />
+                  </div>
+
+                  <div className='mr-5 mb-6'>
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                      संख्या
+                    </label>
+                    <input
+                      type='number'
+                      name='sankhya'
+                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                      placeholder='संख्या'
+                      value={inputField.form3months.sankhya}
+                      onChange={(event) => handleInputChange(index, event)}
+                      required
+                    />
+                  </div>
+                  <div className='mr-5 mb-6 grow'>
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                      कैफियत
+                    </label>
+                    <textarea
+                      type='text'
+                      name='kaifiyat'
+                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                      placeholder='कैफियत'
+                      value={inputField.form3months.kaifiyat}
+                      onChange={(event) => handleInputChange(index, event)}
+                      required
                     />
                   </div>
                 </div>
@@ -586,10 +655,10 @@ const Form1 = () => {
           onClick={onSubmit}
           className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           disabled={
-            !form1Inputs.karyalaya ||
-            !form1Inputs.arthikbarsha ||
-            form1Inputs.date === '' ||
-            inputFields.khadyanna == ''
+            !form3Inputs.karyalaya ||
+            !form3Inputs.arthikbarsha ||
+            form3Inputs.date === '' ||
+            inputFields.bibaran == ''
           }
         >
           पेश गर्नुहोस्
@@ -600,4 +669,4 @@ const Form1 = () => {
   );
 };
 
-export default Form1;
+export default Form3;

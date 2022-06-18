@@ -18,7 +18,18 @@ const Login = () => {
   const [currentUser, setcurrentUser] = currentUserData;
 
   const errorNotification = (error) => {
-    toast.error(`${error}`, {
+    toast.error(`इमेल अथवा पास्स्वोर्ड मिलेन!`, {
+      position: 'top-right',
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  const serverErrorNotification = () => {
+    toast.error(`सर्भर चलेको छैन!`, {
       position: 'top-right',
       autoClose: 1500,
       hideProgressBar: false,
@@ -36,6 +47,9 @@ const Login = () => {
       setcurrentUser(response.data);
       navigate('/admin/dashboard');
     } catch (error) {
+      if (error.message === 'Network Error') {
+        serverErrorNotification();
+      }
       console.log(error.response.data.error.message);
       errorNotification(error.response.data.error.message);
     }
@@ -120,9 +134,9 @@ const Login = () => {
           >
             लग्-इन् गर्नुहोस्
           </button>
-          <Link to='/auth/register' className='text-sm underline text-red-400'>
+          {/* <Link to='/auth/register' className='text-sm underline text-red-400'>
             नया खाता खोल्नुहोस्
-          </Link>
+          </Link> */}
         </form>
         <ToastContainer />
       </div>

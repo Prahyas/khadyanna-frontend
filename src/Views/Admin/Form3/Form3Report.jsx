@@ -3,21 +3,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SingleForm1Detail from './SingleForm1Detail';
-import EditForm1Modal from './EditForm1Modal';
+import SingleForm3Detail from './SingleForm3Detail';
+import EditForm3Modal from './EditForm3Modal';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const Form1Report = () => {
+const Form3Report = () => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { form1Data } = useContext(DataContext);
-  const [form1, setform1] = form1Data;
-  const { fetchform1Function } = useContext(DataContext);
-  const { fetchform1 } = fetchform1Function;
+  const { form3Data } = useContext(DataContext);
+  const [form3, setform3] = form3Data;
+  const { fetchform3Function } = useContext(DataContext);
+  const { fetchform3 } = fetchform3Function;
   const [editModal, setEditModal] = useState(false);
-  const [selectedForm1, setselectedForm1] = useState(null);
+  const [selectedForm3, setselectedForm3] = useState(null);
   const [reportModal, setreportModal] = useState(false);
   const initialDate1 = {
     date1: '',
@@ -31,20 +31,20 @@ const Form1Report = () => {
   const [searchDate2, setserchDate2] = useState(initialDate2);
   const [filterModal, setfilterModal] = useState(false);
 
-  const deleteForm1 = async (form1id) => {
+  const deleteForm3 = async (form3id) => {
     await axios
-      .delete(`${api}/api/form1s/${form1id}`)
+      .delete(`${api}/api/form3s/${form3id}`)
       .then((response) => {
         deleteNotification();
-        fetchform1();
+        fetchform3();
       })
       .catch((error) => {
         errorNotification();
       });
   };
 
-  const editRow = (form1) => {
-    setselectedForm1(form1);
+  const editRow = (form3) => {
+    setselectedForm3(form3);
   };
 
   const deleteNotification = () =>
@@ -73,10 +73,7 @@ const Form1Report = () => {
   return (
     <>
       <div className='flex justify-between items-center mb-2'>
-        <p class='text-2xl dark:text-white'>
-          {' '}
-          खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण रिपोर्ट
-        </p>
+        <p class='text-2xl'> निरीक्षण अनुगमन विवरण रिपोर्ट</p>
         <div className='flex'>
           <button
             onClick={() => {
@@ -226,35 +223,35 @@ const Form1Report = () => {
           searchDate2.timestamp2 ? (
             <>
               <tbody>
-                {form1
+                {form3
                   .filter(
-                    (form1) =>
-                      form1.attributes.timecode >= searchDate1.timestamp1 &&
-                      form1.attributes.timecode <= searchDate2.timestamp2
+                    (form3) =>
+                      form3.attributes.timecode >= searchDate1.timestamp1 &&
+                      form3.attributes.timecode <= searchDate2.timestamp2
                   )
-                  .map((form1) => {
+                  .map((form3) => {
                     return (
                       <tr
-                        key={form1.id}
+                        key={form3.id}
                         class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                       >
                         <th
                           scope='row'
                           class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                         >
-                          {form1.attributes.karyalaya}
+                          {form3.attributes.karyalaya}
                         </th>
 
                         <td class='px-6 py-4'>
-                          {form1.attributes.arthikbarsha}
+                          {form3.attributes.arthikbarsha}
                         </td>
-                        <td class='px-6 py-4'>{form1.attributes.date} </td>
+                        <td class='px-6 py-4'>{form3.attributes.date} </td>
 
                         <td class='flex px-6 py-4'>
                           <a
                             onClick={() => {
                               setEditModal(true);
-                              editRow(form1);
+                              editRow(form3);
                             }}
                             class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                           >
@@ -274,7 +271,7 @@ const Form1Report = () => {
                           </a>
 
                           <a
-                            onClick={() => deleteForm1(form1.id)}
+                            onClick={() => deleteForm3(form3.id)}
                             class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                           >
                             <svg
@@ -293,7 +290,7 @@ const Form1Report = () => {
                           <a
                             onClick={() => {
                               setreportModal(true);
-                              editRow(form1);
+                              editRow(form3);
                             }}
                             class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                           >
@@ -312,22 +309,22 @@ const Form1Report = () => {
                             </svg>
                           </a>
                           {editModal ? (
-                            <EditForm1Modal
+                            <EditForm3Modal
                               editModal={editModal}
                               setEditModal={setEditModal}
-                              form1id={form1.id}
-                              attributes={selectedForm1.attributes}
+                              form3id={form3.id}
+                              attributes={selectedForm3.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
                           {reportModal ? (
-                            <SingleForm1Detail
+                            <SingleForm31Detail
                               reportModal={reportModal}
                               setreportModal={setreportModal}
-                              form1id={form1.id}
+                              form3id={form3.id}
                               // // detailId={detail.id}
-                              selectedForm1={selectedForm1}
-                              attributes={selectedForm1.attributes}
+                              selectedForm3={selectedForm3}
+                              attributes={selectedForm3.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
@@ -341,27 +338,27 @@ const Form1Report = () => {
           ) : (
             <>
               <tbody>
-                {form1.map((form1) => {
+                {form3.map((form3) => {
                   return (
                     <tr
-                      key={form1.id}
+                      key={form3.id}
                       class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                     >
                       <th
                         scope='row'
                         class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                       >
-                        {form1.attributes.karyalaya}
+                        {form3.attributes.karyalaya}
                       </th>
 
-                      <td class='px-6 py-4'>{form1.attributes.arthikbarsha}</td>
-                      <td class='px-6 py-4'>{form1.attributes.date} </td>
+                      <td class='px-6 py-4'>{form3.attributes.arthikbarsha}</td>
+                      <td class='px-6 py-4'>{form3.attributes.date} </td>
 
                       <td class='flex px-6 py-4'>
                         <a
                           onClick={() => {
                             setEditModal(true);
-                            editRow(form1);
+                            editRow(form3);
                           }}
                           class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                         >
@@ -381,7 +378,7 @@ const Form1Report = () => {
                         </a>
 
                         <a
-                          onClick={() => deleteForm1(form1.id)}
+                          onClick={() => deleteForm3(form3.id)}
                           class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                         >
                           <svg
@@ -400,7 +397,7 @@ const Form1Report = () => {
                         <a
                           onClick={() => {
                             setreportModal(true);
-                            editRow(form1);
+                            editRow(form3);
                           }}
                           class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                         >
@@ -419,22 +416,22 @@ const Form1Report = () => {
                           </svg>
                         </a>
                         {editModal ? (
-                          <EditForm1Modal
+                          <EditForm3Modal
                             editModal={editModal}
                             setEditModal={setEditModal}
-                            form1id={selectedForm1.id}
-                            attributes={selectedForm1.attributes}
+                            form3id={selectedForm3.id}
+                            attributes={selectedForm3.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
                         {reportModal ? (
-                          <SingleForm1Detail
+                          <SingleForm3Detail
                             reportModal={reportModal}
                             setreportModal={setreportModal}
-                            form1id={selectedForm1.id}
+                            form3id={selectedForm3.id}
                             // // detailId={detail.id}
-                            selectedForm1={selectedForm1}
-                            attributes={selectedForm1.attributes}
+                            selectedForm3={selectedForm3}
+                            attributes={selectedForm3.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
@@ -452,4 +449,4 @@ const Form1Report = () => {
   );
 };
 
-export default Form1Report;
+export default Form3Report;

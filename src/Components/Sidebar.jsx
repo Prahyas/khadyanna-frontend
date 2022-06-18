@@ -17,7 +17,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
       <div
         className={`${
           showNav ? 'block' : 'hidden'
-        } lg:block z-10 md:z-0 w-[100%] lg:w-[20%] mt-[6vh] lg:mt-0 h-full fixed overflow-y-auto py-4 px-3 bg-gray-200 dark:bg-gray-800`}
+        } lg:block z-[2] w-[100%] lg:w-[20%] mt-[6vh] lg:mt-0 h-full fixed overflow-y-auto py-4 px-3 bg-gray-200 dark:bg-gray-800`}
       >
         <div className='hidden lg:flex justify-center mb-5'>
           <img src={nepalsarkarlogo} height={100} width={100} alt='' />
@@ -57,10 +57,10 @@ const Sidebar = ({ showNav, setshowNav }) => {
                 <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
               </svg>
               <span
-                className='flex-1 ml-3 text-left whitespace-nowrap'
+                className='flex-1 ml-3 text-left break-all'
                 sidebar-toggle-item=''
               >
-                फारम नं १
+                खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण
               </span>
               <svg
                 sidebar-toggle-item=''
@@ -117,10 +117,10 @@ const Sidebar = ({ showNav, setshowNav }) => {
                 <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
               </svg>
               <span
-                className='flex-1 ml-3 text-left whitespace-nowrap'
+                className='flex-1 ml-3 text-left break-all'
                 sidebar-toggle-item=''
               >
-                फारम नं २
+                निरीक्षण अनुगमन विवरण
               </span>
               <svg
                 sidebar-toggle-item=''
@@ -140,7 +140,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
             <ul className={`${dropdown2 ? 'block' : 'hidden'} py-2 space-y-2`}>
               <li>
                 <NavLink
-                  to='/admin/form2'
+                  to='/admin/form3'
                   onClick={() => {
                     setshowNav(!showNav);
                   }}
@@ -151,7 +151,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
               </li>
               <li>
                 <NavLink
-                  to='/admin/form2report'
+                  to='/admin/form3report'
                   onClick={() => {
                     setshowNav(!showNav);
                   }}

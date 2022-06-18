@@ -16,7 +16,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   const initialFormState = {
     date: attributes.date,
     timecode: parseInt(attributes.timecode),
-    aawo: attributes.aawo,
+    arthikbarsha: attributes.arthikbarsha,
     karyalaya: attributes.karyalaya,
     collection: attributes.collection,
   };
@@ -127,12 +127,12 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   };
 
   return (
-    <div className='bg-rgba h-full w-full fixed top-0 left-0  flex justify-center items-center'>
-      <div className='bg-white h-[80%] w-[80%] rounded-xl shadow-lg'>
-        <div className=' w-full h-[15%] border-b-2 flex items-center p-5'>
+    <div className=' z-[3] bg-rgba h-full w-full fixed top-0 left-0  flex justify-center items-center'>
+      <div className='z-[3] bg-white h-[80%] w-[80%] rounded-xl shadow-lg'>
+        <div className='z-[3] w-full h-[15%] border-b-2 flex items-center p-5'>
           <div class='flex justify-between w-full'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-              फारम नं १ सच्याउनुहोस्
+              खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण
             </h3>
             <button
               type='button'
@@ -195,11 +195,11 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                   type='text'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder='आ . ब'
-                  value={form1Inputs.aawo}
+                  value={form1Inputs.arthikbarsha}
                   onChange={(e) =>
                     setform1Inputs({
                       ...form1Inputs,
-                      aawo: e.target.value,
+                      arthikbarsha: e.target.value,
                     })
                   }
                   required
@@ -526,7 +526,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               disabled={
                 !form1Inputs.karyalaya ||
-                !form1Inputs.aawo ||
+                !form1Inputs.arthikbarsha ||
                 form1Inputs.date === '' ||
                 inputFields.khadyanna == ''
               }
@@ -539,12 +539,12 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                 setEditModal(false);
               }}
               className=' disabled:opacity-75 disabled:cursor-not-allowed bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-              disabled={
-                !form1Inputs.karyalaya ||
-                !form1Inputs.aawo ||
-                form1Inputs.date === '' ||
-                inputFields.khadyanna == ''
-              }
+              // disabled={
+              //   !form1Inputs.karyalaya ||
+              //   !form1Inputs.arthikbarsha ||
+              //   form1Inputs.date === '' ||
+              //   inputFields.khadyanna == ''
+              // }
             >
               रद्द
             </button>
@@ -621,11 +621,11 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                 type='text'
     //                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                 placeholder='आ . ब'
-    //                 value={form1Inputs.aawo}
+    //                 value={form1Inputs.arthikbarsha}
     //                 onChange={(e) =>
     //                   setform1Inputs({
     //                     ...form1Inputs,
-    //                     aawo: e.target.value,
+    //                     arthikbarsha: e.target.value,
     //                   })
     //                 }
     //                 required
@@ -973,7 +973,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
     //               disabled={
     //                 !form1Inputs.karyalaya ||
-    //                 !form1Inputs.aawo ||
+    //                 !form1Inputs.arthikbarsha ||
     //                 form1Inputs.date === '' ||
     //                 inputFields.khadyanna == ''
     //               }
@@ -988,7 +988,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //               className=' disabled:opacity-75 disabled:cursor-not-allowed bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
     //               disabled={
     //                 !form1Inputs.karyalaya ||
-    //                 !form1Inputs.aawo ||
+    //                 !form1Inputs.arthikbarsha ||
     //                 form1Inputs.date === '' ||
     //                 inputFields.khadyanna == ''
     //               }

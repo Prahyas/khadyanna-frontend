@@ -3,17 +3,17 @@ import ReactHtmlTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from 'react-to-print';
 import { DataContext } from '../../../ContextAPI/data';
 
-const SingleForm1Detail = ({
-  form1id,
-  selectedForm1,
+const SingleForm3Detail = ({
+  form3id,
+  selectedForm3,
   attributes,
   reportModal,
   setreportModal,
 }) => {
   const componentRef = useRef();
 
-  const monthsArray = attributes.collection.map((item) => {
-    const month = item.months;
+  const monthsArray = attributes.form3collection.map((item) => {
+    const month = item.form3months;
     const { id, ...onlyMonths } = month;
     return onlyMonths;
   });
@@ -85,7 +85,7 @@ const SingleForm1Detail = ({
 
             <div ref={componentRef} class='p-6 space-y-5'>
               <span className='flex justify-center text-black  align-center text-xl'>
-                खाद्य ऐन / नियम बमोजिम संकलित नमुना विवरण
+                निरीक्षण अनुगमन विवरण
               </span>
               <div className='mb-5 flex justify-between text-black '>
                 <div className='flex flex-col'>
@@ -95,15 +95,18 @@ const SingleForm1Detail = ({
                   </span>
                   <span>आर्थिक वर्ष : {attributes.arthikbarsha}</span>
                 </div>
-                <span> मिति : {attributes.date}</span>
+                <div className='flex flex-col'>
+                  <span className='mb-2'> मिति : {attributes.date}</span>
+                  <span>सप्ताह : {attributes.saptaha}</span>
+                </div>
               </div>
 
               <div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
                 <table class=' mb-5 w-full text-sm text-left text-gray-700 dark:text-gray-400'>
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                      <th scope='col' class='w-[15%] px-2 py-2'>
-                        खाद्य समूह
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        अनुगमन निरीक्षण विवरण
                       </th>
                       <th scope='col' class='w-[5%] px-2 py-2'>
                         श्रावण
@@ -141,17 +144,24 @@ const SingleForm1Detail = ({
                       <th scope='col' class='w-[5%] px-2 py-2'>
                         असार
                       </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        पटक
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        संख्या
+                      </th>
+
                       <th
                         scope='col'
-                        class='border-l-2 border-l-gray-400 w-[5%] px-2 py-2'
+                        class='border-l-2 border-l-gray-400 w-[15%] px-2 py-2'
                       >
-                        हालसम्मको जम्मा
+                        कैफियत
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {attributes.collection.map((collectiondata) => {
-                      const month = collectiondata.months;
+                    {attributes.form3collection.map((collectiondata) => {
+                      const month = collectiondata.form3months;
 
                       const { id, ...onlyMonths } = month;
                       const rowTotal = Object.values(onlyMonths).reduce(
@@ -162,46 +172,52 @@ const SingleForm1Detail = ({
                         <>
                           <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
                             <td class='font-bold px-2 py-2 '>
-                              {collectiondata.khadyanna}
+                              {collectiondata.bibaran}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.shrawan}
+                              {collectiondata.form3months.shrawan}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.bhadra}
+                              {collectiondata.form3months.bhadra}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.ashwin}
+                              {collectiondata.form3months.ashwin}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.kartik}
+                              {collectiondata.form3months.kartik}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.mangsir}
+                              {collectiondata.form3months.mangsir}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.poush}
+                              {collectiondata.form3months.poush}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.magh}
+                              {collectiondata.form3months.magh}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.falgun}
+                              {collectiondata.form3months.falgun}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.chaitra}
+                              {collectiondata.form3months.chaitra}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.baisakh}
+                              {collectiondata.form3months.baisakh}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.jestha}
+                              {collectiondata.form3months.jestha}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.ashar}
+                              {collectiondata.form3months.ashar}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.form3months.patak}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.form3months.sankhya}
                             </td>
                             <td class='border-l-2 border-l-gray-400  px-2 py-2'>
-                              {rowTotal}
+                              {collectiondata.form3months.kaifiyat}
                             </td>
                           </tr>
                         </>
@@ -227,8 +243,10 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>{item.baisakh}</td>
                             <td class='px-2 py-2'>{item.jestha}</td>
                             <td class='px-2 py-2'>{item.ashar}</td>
+                            <td class='px-2 py-2'>{item.patak}</td>
+                            <td class='px-2 py-2'>{item.sankhya}</td>
                             <td class='border-l-2 border-l-gray-400  px-2 py-2'>
-                              {grandTotal}
+                              {``}
                             </td>
                           </>
                         );
@@ -246,7 +264,7 @@ const SingleForm1Detail = ({
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
                       <th scope='col' class=' px-2 py-2'>
-                        फारम नं १
+                        फारम नं ३
                       </th>
                       <th scope='col' class=' px-2 py-2'>
                         कार्यालय
@@ -257,23 +275,25 @@ const SingleForm1Detail = ({
                       <th scope='col' class=' px-2 py-2'>
                         मिति
                       </th>
+                      <th scope='col' class=' px-2 py-2'>
+                        सप्ताह
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td class=' px-2 py-2'>
-                        खाद्य ऐन / नियम बमोजिम संकलित नमुना विवरण
-                      </td>
+                      <td class=' px-2 py-2'>निरीक्षण अनुगमन विवरण</td>
                       <td class=' px-2 py-2'>{attributes.karyalaya}</td>
                       <td class='px-2 py-2 '>{attributes.arthikbarsha}</td>
                       <td class='px-2 py-2'>{attributes.date}</td>
+                      <td class='px-2 py-2'>{attributes.saptaha}</td>
                     </tr>
                   </tbody>
                   <br />
                   <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                      <th scope='col' class='w-[15%] px-2 py-2'>
-                        खाद्य समूह
+                      <th scope='col' class='w-[55%] px-2 py-2'>
+                        अनुगमन निरीक्षण विवरण
                       </th>
                       <th scope='col' class='w-[5%] px-2 py-2'>
                         श्रावण
@@ -311,17 +331,23 @@ const SingleForm1Detail = ({
                       <th scope='col' class='w-[5%] px-2 py-2'>
                         असार
                       </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        पटक
+                      </th>
+                      <th scope='col' class='w-[5%] px-2 py-2'>
+                        संख्या
+                      </th>
                       <th
                         scope='col'
-                        class='border-l-2 border-l-gray-400 w-[5%] px-2 py-2'
+                        class='border-l-2 border-l-gray-400 w-[15%] px-2 py-2'
                       >
-                        हालसम्मको जम्मा
+                        कैफियत
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {attributes.collection.map((collectiondata) => {
-                      const month = collectiondata.months;
+                    {attributes.form3collection.map((collectiondata) => {
+                      const month = collectiondata.form3months;
 
                       const { id, ...onlyMonths } = month;
                       const rowTotal = Object.values(onlyMonths).reduce(
@@ -332,46 +358,52 @@ const SingleForm1Detail = ({
                         <>
                           <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
                             <td class='font-bold px-2 py-2 '>
-                              {collectiondata.khadyanna}
+                              {collectiondata.bibaran}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.shrawan}
+                              {collectiondata.form3months.shrawan}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.bhadra}
+                              {collectiondata.form3months.bhadra}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.ashwin}
+                              {collectiondata.form3months.ashwin}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.kartik}
+                              {collectiondata.form3months.kartik}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.mangsir}
+                              {collectiondata.form3months.mangsir}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.poush}
+                              {collectiondata.form3months.poush}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.magh}
+                              {collectiondata.form3months.magh}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.falgun}
+                              {collectiondata.form3months.falgun}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.chaitra}
+                              {collectiondata.form3months.chaitra}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.baisakh}
+                              {collectiondata.form3months.baisakh}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.jestha}
+                              {collectiondata.form3months.jestha}
                             </td>
                             <td class='px-2 py-2'>
-                              {collectiondata.months.ashar}
+                              {collectiondata.form3months.ashar}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.form3months.patak}
+                            </td>
+                            <td class='px-2 py-2'>
+                              {collectiondata.form3months.sankhya}
                             </td>
                             <td class='border-l-2 border-l-gray-400  px-6 py-2'>
-                              {rowTotal}
+                              {collectiondata.form3months.kaifiyat}
                             </td>
                           </tr>
                         </>
@@ -397,8 +429,10 @@ const SingleForm1Detail = ({
                             <td class='px-2 py-2'>{item.baisakh}</td>
                             <td class='px-2 py-2'>{item.jestha}</td>
                             <td class='px-2 py-2'>{item.ashar}</td>
+                            <td class='px-2 py-2'>{item.patak}</td>
+                            <td class='px-2 py-2'>{item.sankhya}</td>
                             <td class='border-l-2 border-l-gray-400  px-6 py-2'>
-                              {grandTotal}
+                              {``}
                             </td>
                           </>
                         );
@@ -415,4 +449,4 @@ const SingleForm1Detail = ({
   );
 };
 
-export default SingleForm1Detail;
+export default SingleForm3Detail;

@@ -11,6 +11,8 @@ import Form1Report from '../Views/Admin/Form1/Form1Report';
 import { DataContext } from '../ContextAPI/data';
 import NotFound from '../Components/NotFound';
 import NoAuthorization from '../Views/Admin/NoAuthorization';
+import Form3 from '../Views/Admin/Form3/Form3';
+import Form3Report from '../Views/Admin/Form3/Form3Report';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
@@ -72,13 +74,13 @@ const Admin = () => {
                 )}
                 {currentUser.user.department === 'FFSQRD' ? (
                   <>
-                    <Route path='form2' element={<Form1 />} />
-                    <Route path='form2report' element={<Form1Report />} />
+                    <Route path='form3' element={<Form3 />} />
+                    <Route path='form3report' element={<Form3Report />} />
                   </>
                 ) : (
                   <>
                     <Route
-                      path='form2'
+                      path='form3'
                       element={
                         <NoAuthorization
                           errorTitle={`माफ गर्नुहोला!`}
@@ -87,7 +89,7 @@ const Admin = () => {
                       }
                     />
                     <Route
-                      path='form2report'
+                      path='form3report'
                       element={
                         <NoAuthorization
                           errorTitle={`माफ गर्नुहोला!`}
