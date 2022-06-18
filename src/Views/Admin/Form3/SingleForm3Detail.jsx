@@ -216,7 +216,7 @@ const SingleForm3Detail = ({
                             <td class='px-2 py-2'>
                               {collectiondata.form3months.sankhya}
                             </td>
-                            <td class='border-l-2 border-l-gray-400  px-2 py-2'>
+                            <td class='border-l-2 border-l-gray-400  px-2 py-2 break-after-auto'>
                               {collectiondata.form3months.kaifiyat}
                             </td>
                           </tr>

@@ -9,6 +9,8 @@ export const DataProvider = (props) => {
   const [form1, setform1] = useState([]);
   const [form3, setform3] = useState([]);
   const [form5, setform5] = useState([]);
+  const [form7, setform7] = useState([]);
+  const [form10, setform10] = useState([]);
   const [currentUser, setcurrentUser] = useState(null);
 
   useEffect(() => {
@@ -60,11 +62,33 @@ export const DataProvider = (props) => {
       console.error(error.message);
     }
   };
+  const fetchform7 = async () => {
+    try {
+      const response = await axios.get(
+        `${api}/api/form7s?sort[0]=createdAt%3Adesc&populate[0]=form7collection&populate[1]=form7collection.form7months`
+      );
+      setform7(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const fetchform10 = async () => {
+    try {
+      const response = await axios.get(
+        `${api}/api/form10s?sort[0]=createdAt%3Adesc&populate[0]=form10collection&populate[1]=form10collection.form10months`
+      );
+      setform10(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     fetchform1();
     fetchform3();
     fetchform5();
+    fetchform7();
+    fetchform10();
   }, []);
 
   return (
@@ -77,6 +101,10 @@ export const DataProvider = (props) => {
         fetchform3Function: { fetchform3 },
         form5Data: [form5, setform5],
         fetchform5Function: { fetchform5 },
+        form7Data: [form7, setform7],
+        fetchform7Function: { fetchform7 },
+        form10Data: [form10, setform10],
+        fetchform10Function: { fetchform10 },
         currentUserData: [currentUser, setcurrentUser],
       }}
     >
