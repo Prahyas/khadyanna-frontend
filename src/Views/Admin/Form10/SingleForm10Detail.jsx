@@ -183,10 +183,16 @@ const SingleForm10Detail = ({
                         चेक सेम्पल (नमुना संख्या)
                       </th>
 
-                      <th scope='col' class='w-[10%] px-2 py-2'>
+                      <th
+                        scope='col'
+                        class='w-[10%] border-l-2 border-l-gray-400 px-2 py-2'
+                      >
                         कुल जम्मा (नमुना संख्या)
                       </th>
-                      <th scope='col' class='w-[10%] px-2 py-2'>
+                      <th
+                        scope='col'
+                        class='w-[10%] border-l-2 border-l-gray-400 px-2 py-2'
+                      >
                         कुल जम्मा (प्रतिकुल)
                       </th>
 
@@ -282,9 +288,13 @@ const SingleForm10Detail = ({
                             <td class='px-2 py-2'>
                               {collectiondata.form10months.samplesankhya}
                             </td>
-                            <td class='px-2 py-2'>{sankhyaTotal}</td>
+                            <td class='border-l-2 border-l-gray-400 px-2 py-2'>
+                              {sankhyaTotal}
+                            </td>
 
-                            <td class='px-2 py-2'>{pratikulTotal}</td>
+                            <td class='border-l-2 border-l-gray-400 px-2 py-2'>
+                              {pratikulTotal}
+                            </td>
 
                             <td class='border-l-2 border-l-gray-400 px-2 py-2 break-after-auto'>
                               {collectiondata.form10months.kaifiyat}
@@ -312,8 +322,12 @@ const SingleForm10Detail = ({
                             <td class='px-2 py-2'>{item.anugyasankhya}</td>
                             <td class='px-2 py-2'>{item.anugyapratikul}</td>
                             <td class='px-2 py-2'>{item.samplesankhya}</td>
-                            <td class='px-2 py-2'>{sankhyagrandTotal}</td>
-                            <td class='px-2 py-2'>{pratikulgrandTotal}</td>
+                            <td class='border-l-2 border-l-gray-400 px-2 py-2'>
+                              {sankhyagrandTotal}
+                            </td>
+                            <td class='border-l-2 border-l-gray-400 px-2 py-2'>
+                              {pratikulgrandTotal}
+                            </td>
 
                             <td class='border-l-2 border-l-gray-400  px-2 py-2'>
                               {``}
