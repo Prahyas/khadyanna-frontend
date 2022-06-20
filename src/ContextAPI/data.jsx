@@ -13,6 +13,8 @@ export const DataProvider = (props) => {
   const [form10, setform10] = useState([]);
   const [form11, setform11] = useState([]);
   const [form15, setform15] = useState([]);
+  const [form16, setform16] = useState([]);
+  const [form19, setform19] = useState([]);
   const [currentUser, setcurrentUser] = useState(null);
 
   useEffect(() => {
@@ -104,6 +106,26 @@ export const DataProvider = (props) => {
       console.error(error.message);
     }
   };
+  const fetchform16 = async () => {
+    try {
+      const response = await axios.get(
+        `${api}/api/form16s?sort[0]=createdAt%3Adesc&populate[0]=form16collection&populate[1]=form16collection.form16months`
+      );
+      setform16(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const fetchform19 = async () => {
+    try {
+      const response = await axios.get(
+        `${api}/api/form19s?sort[0]=createdAt%3Adesc&populate[0]=form19collection&populate[1]=form19collection.form19months`
+      );
+      setform19(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     fetchform1();
@@ -113,6 +135,8 @@ export const DataProvider = (props) => {
     fetchform10();
     fetchform11();
     fetchform15();
+    fetchform16();
+    fetchform19();
   }, []);
 
   return (
@@ -133,6 +157,10 @@ export const DataProvider = (props) => {
         fetchform11Function: { fetchform11 },
         form15Data: [form15, setform15],
         fetchform15Function: { fetchform15 },
+        form16Data: [form16, setform16],
+        fetchform16Function: { fetchform16 },
+        form19Data: [form19, setform19],
+        fetchform19Function: { fetchform19 },
         currentUserData: [currentUser, setcurrentUser],
       }}
     >

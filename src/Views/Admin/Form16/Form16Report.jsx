@@ -3,21 +3,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SingleForm15Detail from './SingleForm15Detail';
-import EditForm15Modal from './EditForm15Modal';
+import SingleForm16Detail from './SingleForm16Detail';
+import EditForm16Modal from './EditForm16Modal';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const Form15Report = () => {
+const Form16Report = () => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { form15Data } = useContext(DataContext);
-  const [form15, setform15] = form15Data;
-  const { fetchform15Function } = useContext(DataContext);
-  const { fetchform15 } = fetchform15Function;
+  const { form16Data } = useContext(DataContext);
+  const [form16, setform16] = form16Data;
+  const { fetchform16Function } = useContext(DataContext);
+  const { fetchform16 } = fetchform16Function;
   const [editModal, setEditModal] = useState(false);
-  const [selectedForm15, setselectedForm15] = useState(null);
+  const [selectedForm16, setselectedForm16] = useState(null);
   const [reportModal, setreportModal] = useState(false);
   const initialDate1 = {
     date1: '',
@@ -31,20 +31,20 @@ const Form15Report = () => {
   const [searchDate2, setserchDate2] = useState(initialDate2);
   const [filterModal, setfilterModal] = useState(false);
 
-  const deleteForm15 = async (form15id) => {
+  const deleteForm16 = async (form16id) => {
     await axios
-      .delete(`${api}/api/form15s/${form15id}`)
+      .delete(`${api}/api/form16s/${form16id}`)
       .then((response) => {
         deleteNotification();
-        fetchform15();
+        fetchform16();
       })
       .catch((error) => {
         errorNotification();
       });
   };
 
-  const editRow = (form15) => {
-    setselectedForm15(form15);
+  const editRow = (form16) => {
+    setselectedForm16(form16);
   };
 
   const deleteNotification = () =>
@@ -73,7 +73,10 @@ const Form15Report = () => {
   return (
     <>
       <div className='flex justify-between items-center mb-2'>
-        <p class='text-sm md:text-2xl'> मुद्दा दायरी विवरण रिपोर्ट</p>
+        <p class='text-sm md:text-2xl'>
+          {' '}
+          खाद्य तथा दाना अनुज्ञा पत्र जारी/नविकरण/उद्योग सिफारिस रिपोर्ट
+        </p>
         <div className='flex'>
           <button
             onClick={() => {
@@ -211,9 +214,6 @@ const Form15Report = () => {
               <th scope='col' class='w-[25%] px-6 py-3'>
                 मिति
               </th>
-              <th scope='col' class='w-[25%] px-6 py-3'>
-                सप्ताह
-              </th>
 
               <th scope='col' class='w-[15%] px-6 py-3'>
                 <span class='sr-only'>Edit</span>
@@ -226,36 +226,35 @@ const Form15Report = () => {
           searchDate2.timestamp2 ? (
             <>
               <tbody>
-                {form15
+                {form16
                   .filter(
-                    (form15) =>
-                      form15.attributes.timecode >= searchDate1.timestamp1 &&
-                      form15.attributes.timecode <= searchDate2.timestamp2
+                    (form16) =>
+                      form16.attributes.timecode >= searchDate1.timestamp1 &&
+                      form16.attributes.timecode <= searchDate2.timestamp2
                   )
-                  .map((form15) => {
+                  .map((form16) => {
                     return (
                       <tr
-                        key={form15.id}
+                        key={form16.id}
                         class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                       >
                         <th
                           scope='row'
                           class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                         >
-                          {form15.attributes.karyalaya}
+                          {form16.attributes.karyalaya}
                         </th>
 
                         <td class='px-6 py-4'>
-                          {form15.attributes.arthikbarsha}
+                          {form16.attributes.arthikbarsha}
                         </td>
-                        <td class='px-6 py-4'>{form15.attributes.date} </td>
-                        <td class='px-6 py-4'>{form15.attributes.saptaha} </td>
+                        <td class='px-6 py-4'>{form16.attributes.date} </td>
 
                         <td class='flex px-6 py-4'>
                           <a
                             onClick={() => {
                               setEditModal(true);
-                              editRow(form15);
+                              editRow(form16);
                             }}
                             class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                           >
@@ -265,7 +264,7 @@ const Form15Report = () => {
                               viewBox='0 0 20 20'
                               fill='currentColor'
                             >
-                              <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                              <path d='m167.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
                               <path
                                 fill-rule='evenodd'
                                 d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
@@ -275,7 +274,7 @@ const Form15Report = () => {
                           </a>
 
                           <a
-                            onClick={() => deleteForm15(form15.id)}
+                            onClick={() => deleteForm16(form16.id)}
                             class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                           >
                             <svg
@@ -286,7 +285,7 @@ const Form15Report = () => {
                             >
                               <path
                                 fill-rule='evenodd'
-                                d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zm15 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm15-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z'
+                                d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z'
                                 clip-rule='evenodd'
                               />
                             </svg>
@@ -294,7 +293,7 @@ const Form15Report = () => {
                           <a
                             onClick={() => {
                               setreportModal(true);
-                              editRow(form15);
+                              editRow(form16);
                             }}
                             class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                           >
@@ -304,31 +303,31 @@ const Form15Report = () => {
                               viewBox='0 0 20 20'
                               fill='currentColor'
                             >
-                              <path d='m15 12a2 2 0 100-4 2 2 0 000 4z' />
+                              <path d='m160 12a2 2 0 100-4 2 2 0 000 4z' />
                               <path
                                 fillRule='evenodd'
-                                d='M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z'
+                                d='M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zm164 10a4 4 0 11-8 0 4 4 0 018 0z'
                                 clipRule='evenodd'
                               />
                             </svg>
                           </a>
                           {editModal ? (
-                            <EditForm15Modal
+                            <EditForm16Modal
                               editModal={editModal}
                               setEditModal={setEditModal}
-                              form15id={form15.id}
-                              attributes={selectedForm15.attributes}
+                              form16id={form16.id}
+                              attributes={selectedForm16.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
                           {reportModal ? (
-                            <SingleForm151Detail
+                            <SingleForm16Detail
                               reportModal={reportModal}
                               setreportModal={setreportModal}
-                              form15id={form15.id}
+                              form16id={form16.id}
                               // // detailId={detail.id}
-                              selectedForm15={selectedForm15}
-                              attributes={selectedForm15.attributes}
+                              selectedForm16={selectedForm16}
+                              attributes={selectedForm16.attributes}
                               // updateDepartments={updateDepartments}
                             />
                           ) : null}
@@ -342,30 +341,29 @@ const Form15Report = () => {
           ) : (
             <>
               <tbody>
-                {form15.map((form15) => {
+                {form16.map((form16) => {
                   return (
                     <tr
-                      key={form15.id}
+                      key={form16.id}
                       class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'
                     >
                       <th
                         scope='row'
                         class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                       >
-                        {form15.attributes.karyalaya}
+                        {form16.attributes.karyalaya}
                       </th>
 
                       <td class='px-6 py-4'>
-                        {form15.attributes.arthikbarsha}
+                        {form16.attributes.arthikbarsha}
                       </td>
-                      <td class='px-6 py-4'>{form15.attributes.date} </td>
-                      <td class='px-6 py-4'>{form15.attributes.saptaha} </td>
+                      <td class='px-6 py-4'>{form16.attributes.date} </td>
 
                       <td class='flex px-6 py-4'>
                         <a
                           onClick={() => {
                             setEditModal(true);
-                            editRow(form15);
+                            editRow(form16);
                           }}
                           class='mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline'
                         >
@@ -385,7 +383,7 @@ const Form15Report = () => {
                         </a>
 
                         <a
-                          onClick={() => deleteForm15(form15.id)}
+                          onClick={() => deleteForm16(form16.id)}
                           class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                         >
                           <svg
@@ -404,7 +402,7 @@ const Form15Report = () => {
                         <a
                           onClick={() => {
                             setreportModal(true);
-                            editRow(form15);
+                            editRow(form16);
                           }}
                           class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
                         >
@@ -423,22 +421,22 @@ const Form15Report = () => {
                           </svg>
                         </a>
                         {editModal ? (
-                          <EditForm15Modal
+                          <EditForm16Modal
                             editModal={editModal}
                             setEditModal={setEditModal}
-                            form15id={selectedForm15.id}
-                            attributes={selectedForm15.attributes}
+                            form16id={selectedForm16.id}
+                            attributes={selectedForm16.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
                         {reportModal ? (
-                          <SingleForm15Detail
+                          <SingleForm16Detail
                             reportModal={reportModal}
                             setreportModal={setreportModal}
-                            form15id={selectedForm15.id}
+                            form16id={selectedForm16.id}
                             // // detailId={detail.id}
-                            selectedForm15={selectedForm15}
-                            attributes={selectedForm15.attributes}
+                            selectedForm16={selectedForm16}
+                            attributes={selectedForm16.attributes}
                             // updateDepartments={updateDepartments}
                           />
                         ) : null}
@@ -456,4 +454,4 @@ const Form15Report = () => {
   );
 };
 
-export default Form15Report;
+export default Form16Report;

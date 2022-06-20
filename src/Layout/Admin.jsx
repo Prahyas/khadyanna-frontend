@@ -23,6 +23,10 @@ import Form11 from '../Views/Admin/Form11/Form11';
 import Form11Report from '../Views/Admin/Form11/Form11Report';
 import Form15 from '../Views/Admin/Form15/Form15';
 import Form15Report from '../Views/Admin/Form15/Form15Report';
+import Form16 from '../Views/Admin/Form16/Form16';
+import Form16Report from '../Views/Admin/Form16/Form16Report';
+import Form19 from '../Views/Admin/Form19/Form19';
+import Form19Report from '../Views/Admin/Form19/Form19Report';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
@@ -235,6 +239,60 @@ const Admin = () => {
                     />
                     <Route
                       path='form15report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                {currentUser.user.department === 'PS' ? (
+                  <>
+                    <Route path='form16' element={<Form16 />} />
+                    <Route path='form16report' element={<Form16Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form16'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form16report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                {currentUser.user.department === 'PS' ? (
+                  <>
+                    <Route path='form19' element={<Form19 />} />
+                    <Route path='form19report' element={<Form19Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form19'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form19report'
                       element={
                         <NoAuthorization
                           errorTitle={`माफ गर्नुहोला!`}

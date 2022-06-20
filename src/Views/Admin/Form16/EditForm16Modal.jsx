@@ -7,61 +7,63 @@ import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
+const EditForm16Modal = ({ editModal, setEditModal, form16id, attributes }) => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { fetchform1Function } = useContext(DataContext);
-  const { fetchform1 } = fetchform1Function;
-  const [inputFields, setInputFields] = useState([...attributes.collection]);
+  const { fetchform16Function } = useContext(DataContext);
+  const { fetchform16 } = fetchform16Function;
+  const [inputFields, setInputFields] = useState([
+    ...attributes.form16collection,
+  ]);
   const initialFormState = {
     date: attributes.date,
     timecode: parseInt(attributes.timecode),
     arthikbarsha: attributes.arthikbarsha,
     karyalaya: attributes.karyalaya,
-    collection: attributes.collection,
+    form16collection: attributes.form16collection,
   };
 
-  const [form1Inputs, setform1Inputs] = useState(initialFormState);
+  const [form16Inputs, setform16Inputs] = useState(initialFormState);
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
     if (event.target.name === 'khadyanna') {
       values[index].khadyanna = event.target.value;
     } else if (event.target.name === 'shrawan') {
-      values[index].months.shrawan = event.target.value;
+      values[index].form16months.shrawan = event.target.value;
     } else if (event.target.name === 'bhadra') {
-      values[index].months.bhadra = event.target.value;
+      values[index].form16months.bhadra = event.target.value;
     } else if (event.target.name === 'ashwin') {
-      values[index].months.ashwin = event.target.value;
+      values[index].form16months.ashwin = event.target.value;
     } else if (event.target.name === 'kartik') {
-      values[index].months.kartik = event.target.value;
+      values[index].form16months.kartik = event.target.value;
     } else if (event.target.name === 'mangsir') {
-      values[index].months.mangsir = event.target.value;
+      values[index].form16months.mangsir = event.target.value;
     } else if (event.target.name === 'poush') {
-      values[index].months.poush = event.target.value;
+      values[index].form16months.poush = event.target.value;
     } else if (event.target.name === 'magh') {
-      values[index].months.magh = event.target.value;
+      values[index].form16months.magh = event.target.value;
     } else if (event.target.name === 'falgun') {
-      values[index].months.falgun = event.target.value;
+      values[index].form16months.falgun = event.target.value;
     } else if (event.target.name === 'chaitra') {
-      values[index].months.chaitra = event.target.value;
+      values[index].form16months.chaitra = event.target.value;
     } else if (event.target.name === 'baisakh') {
-      values[index].months.baisakh = event.target.value;
+      values[index].form16months.baisakh = event.target.value;
     } else if (event.target.name === 'jestha') {
-      values[index].months.jestha = event.target.value;
+      values[index].form16months.jestha = event.target.value;
     } else {
-      values[index].months.ashar = event.target.value;
+      values[index].form16months.ashar = event.target.value;
     }
 
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, collection: values });
+    setform16Inputs({ ...form16Inputs, form16collection: values });
   };
 
   const handleAddFields = () => {
     const values = [...inputFields];
     values.push({
       khadyanna: '',
-      months: {
+      form16months: {
         shrawan: 0,
         bhadra: 0,
         ashwin: 0,
@@ -77,7 +79,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
       },
     });
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, months: values });
+    setform16Inputs({ ...form16Inputs, form16months: values });
   };
 
   const handleRemoveFields = (index) => {
@@ -86,7 +88,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
       values.splice(index, 1);
     }
     setInputFields(values);
-    setform1Inputs({ ...form1Inputs, months: values });
+    setform16Inputs({ ...form16Inputs, form16months: values });
   };
 
   const successNotification = () =>
@@ -112,14 +114,14 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     });
   };
 
-  const onSubmit = async (form1id) => {
+  const onSubmit = async (form16id) => {
     try {
-      await axios.put(`${api}/api/form1s/${form1id}`, {
-        data: form1Inputs,
+      await axios.put(`${api}/api/form16s/${form16id}`, {
+        data: form16Inputs,
       });
-      setform1Inputs(initialFormState);
+      setform16Inputs(initialFormState);
       successNotification();
-      fetchform1();
+      fetchform16();
       setEditModal(false);
     } catch (error) {
       errorNotification(error);
@@ -132,7 +134,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
         <div className='z-[3] w-full h-[15%] border-b-2 flex items-center p-5'>
           <div class='flex justify-between w-full'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-              खाद्य ऐन/नियम बमोजिम संकलित नमुना विवरण
+              खाद्य तथा दाना अनुज्ञा पत्र जारी/नविकरण/उद्योग सिफारिस
             </h3>
             <button
               type='button'
@@ -165,10 +167,10 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                   name='karyalaya'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
-                  value={form1Inputs.karyalaya}
+                  value={form16Inputs.karyalaya}
                   onChange={(e) =>
-                    setform1Inputs({
-                      ...form1Inputs,
+                    setform16Inputs({
+                      ...form16Inputs,
                       karyalaya: e.target.value,
                     })
                   }
@@ -181,27 +183,12 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                   <option value='NFFRL'>NFFRL</option>
                   <option value='FTDND'>FTDND</option>
                   <option value='FTQCO'>FTQCO</option>
+
                   <option value='FIEQCO'>FIEQCO</option>
                   <option value='FTQCDO'>FTQCDO</option>
                 </select>
-                {/* <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-              कार्यालय
-            </label>
-            <input
-              type='text'
-              id='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='कार्यालय'
-              value={form1Inputs.karyalaya}
-              onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
-                  karyalaya: e.target.value,
-                })
-              }
-              required
-            /> */}
               </div>
+
               <div className='mr-5 mb-6'>
                 <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                   आ . ब
@@ -210,10 +197,10 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                   type='text'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder='आ . ब'
-                  value={form1Inputs.arthikbarsha}
+                  value={form16Inputs.arthikbarsha}
                   onChange={(e) =>
-                    setform1Inputs({
-                      ...form1Inputs,
+                    setform16Inputs({
+                      ...form16Inputs,
                       arthikbarsha: e.target.value,
                     })
                   }
@@ -227,33 +214,20 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                 <NepaliDatePicker
                   inputClassName='form-control'
                   className='mb-6'
-                  value={form1Inputs.date}
+                  value={form16Inputs.date}
                   onChange={(value) => {
                     const adDate = bsToAd(value);
 
                     const newtimestamp = Date.parse(adDate);
 
-                    setform1Inputs({
-                      ...form1Inputs,
+                    setform16Inputs({
+                      ...form16Inputs,
                       date: value,
                       timecode: newtimestamp,
                     });
                   }}
                   options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                 />
-                {/* <input
-              type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='आर्थिक बर्ष'
-              value={form1Inputs.date}
-              onChange={(e) =>
-                setform1Inputs({
-                  ...form1Inputs,
-                  date: e.target.value,
-                })
-              }
-              required
-            /> */}
               </div>
             </div>
 
@@ -333,6 +307,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                         </button>
                       </div>
                     </div>
+
                     <select
                       id='countries'
                       name='khadyanna'
@@ -376,7 +351,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='shrawan'
-                          value={inputField.months.shrawan}
+                          value={inputField.form16months.shrawan}
                           placeholder='श्रावण'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -391,7 +366,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='bhadra'
-                          value={inputField.months.bhadra}
+                          value={inputField.form16months.bhadra}
                           placeholder='भदौ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -406,11 +381,12 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashwin'
-                          value={inputField.months.ashwin}
+                          value={inputField.form16months.ashwin}
                           placeholder='आश्विन'
                           onChange={(event) => handleInputChange(index, event)}
                         />
                       </div>
+
                       <div className='mb-2'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
                           कार्तिक
@@ -421,7 +397,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='kartik'
-                          value={inputField.months.kartik}
+                          value={inputField.form16months.kartik}
                           placeholder='कार्तिक'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -436,7 +412,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='mangsir'
-                          value={inputField.months.mangsir}
+                          value={inputField.form16months.mangsir}
                           placeholder='मंसिर'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -451,7 +427,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='poush'
-                          value={inputField.months.poush}
+                          value={inputField.form16months.poush}
                           placeholder='पुष'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -467,7 +443,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='magh'
-                          value={inputField.months.magh}
+                          value={inputField.form16months.magh}
                           placeholder='माघ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -482,7 +458,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='falgun'
-                          value={inputField.months.falgun}
+                          value={inputField.form16months.falgun}
                           placeholder='फाल्गुन'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -497,7 +473,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='chaitra'
-                          value={inputField.months.chaitra}
+                          value={inputField.form16months.chaitra}
                           placeholder='चैत्र'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -513,7 +489,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='baisakh'
-                          value={inputField.months.baisakh}
+                          value={inputField.form16months.baisakh}
                           placeholder='बैशाख'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -528,7 +504,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='jestha'
-                          value={inputField.months.jestha}
+                          value={inputField.form16months.jestha}
                           placeholder='जेठ'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -543,7 +519,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
                           className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                           required
                           name='ashar'
-                          value={inputField.months.ashar}
+                          value={inputField.form16months.ashar}
                           placeholder='असार'
                           onChange={(event) => handleInputChange(index, event)}
                         />
@@ -562,13 +538,13 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
             <button
               type='button'
               onClick={() => {
-                onSubmit(form1id);
+                onSubmit(form16id);
               }}
               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               disabled={
-                !form1Inputs.karyalaya ||
-                !form1Inputs.arthikbarsha ||
-                form1Inputs.date === '' ||
+                !form16Inputs.karyalaya ||
+                !form16Inputs.arthikbarsha ||
+                form16Inputs.date === '' ||
                 inputFields.khadyanna == ''
               }
             >
@@ -581,9 +557,9 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
               }}
               className=' disabled:opacity-75 disabled:cursor-not-allowed bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               // disabled={
-              //   !form1Inputs.karyalaya ||
-              //   !form1Inputs.arthikbarsha ||
-              //   form1Inputs.date === '' ||
+              //   !form16Inputs.karyalaya ||
+              //   !form16Inputs.arthikbarsha ||
+              //   form16Inputs.date === '' ||
               //   inputFields.khadyanna == ''
               // }
             >
@@ -632,10 +608,10 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                 name='karyalaya'
     //                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                 required
-    //                 value={form1Inputs.karyalaya}
+    //                 value={form16Inputs.karyalaya}
     //                 onChange={(e) =>
-    //                   setform1Inputs({
-    //                     ...form1Inputs,
+    //                   setform16Inputs({
+    //                     ...form16Inputs,
     //                     karyalaya: e.target.value,
     //                   })
     //                 }
@@ -662,10 +638,10 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                 type='text'
     //                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                 placeholder='आ . ब'
-    //                 value={form1Inputs.arthikbarsha}
+    //                 value={form16Inputs.arthikbarsha}
     //                 onChange={(e) =>
-    //                   setform1Inputs({
-    //                     ...form1Inputs,
+    //                   setform16Inputs({
+    //                     ...form16Inputs,
     //                     arthikbarsha: e.target.value,
     //                   })
     //                 }
@@ -679,14 +655,14 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //               <NepaliDatePicker
     //                 inputClassName='form-control'
     //                 className='mb-6'
-    //                 value={form1Inputs.date}
+    //                 value={form16Inputs.date}
     //                 onChange={(value) => {
     //                   const adDate = bsToAd(value);
 
     //                   const newtimestamp = Date.parse(adDate);
 
-    //                   setform1Inputs({
-    //                     ...form1Inputs,
+    //                   setform16Inputs({
+    //                     ...form16Inputs,
     //                     date: value,
     //                     timecode: newtimestamp,
     //                   });
@@ -715,7 +691,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                 >
     //                   <path
     //                     fillRule='evenodd'
-    //                     d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
+    //                     d='m160 18a8 8 0 100-16 8 8 0 000 16zm16-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
     //                     clipRule='evenodd'
     //                   />
     //                 </svg>
@@ -778,7 +754,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                       >
     //                         <path
     //                           fillRule='evenodd'
-    //                           d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
+    //                           d='m160 18a8 8 0 100-16 8 8 0 000 16zm16-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
     //                           clipRule='evenodd'
     //                         />
     //                       </svg>
@@ -797,7 +773,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                       >
     //                         <path
     //                           fillRule='evenodd'
-    //                           d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
+    //                           d='m160 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
     //                           clipRule='evenodd'
     //                         />
     //                       </svg>
@@ -814,7 +790,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='shrawan'
-    //                         value={inputField.months.shrawan}
+    //                         value={inputField.form16months.shrawan}
     //                         placeholder='श्रावण'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -830,7 +806,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='bhadra'
-    //                         value={inputField.months.bhadra}
+    //                         value={inputField.form16months.bhadra}
     //                         placeholder='भदौ'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -846,7 +822,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='ashwin'
-    //                         value={inputField.months.ashwin}
+    //                         value={inputField.form16months.ashwin}
     //                         placeholder='आश्विन'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -863,7 +839,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='kartik'
-    //                         value={inputField.months.kartik}
+    //                         value={inputField.form16months.kartik}
     //                         placeholder='कार्तिक'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -879,7 +855,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='mangsir'
-    //                         value={inputField.months.mangsir}
+    //                         value={inputField.form16months.mangsir}
     //                         placeholder='मंसिर'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -895,7 +871,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='poush'
-    //                         value={inputField.months.poush}
+    //                         value={inputField.form16months.poush}
     //                         placeholder='पुष'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -912,7 +888,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='magh'
-    //                         value={inputField.months.magh}
+    //                         value={inputField.form16months.magh}
     //                         placeholder='माघ'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -928,7 +904,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='falgun'
-    //                         value={inputField.months.falgun}
+    //                         value={inputField.form16months.falgun}
     //                         placeholder='फाल्गुन'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -944,7 +920,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='chaitra'
-    //                         value={inputField.months.chaitra}
+    //                         value={inputField.form16months.chaitra}
     //                         placeholder='चैत्र'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -961,7 +937,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='baisakh'
-    //                         value={inputField.months.baisakh}
+    //                         value={inputField.form16months.baisakh}
     //                         placeholder='बैशाख'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -977,7 +953,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='jestha'
-    //                         value={inputField.months.jestha}
+    //                         value={inputField.form16months.jestha}
     //                         placeholder='जेठ'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -993,7 +969,7 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //                         className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
     //                         required
     //                         name='ashar'
-    //                         value={inputField.months.ashar}
+    //                         value={inputField.form16months.ashar}
     //                         placeholder='असार'
     //                         onChange={(event) =>
     //                           handleInputChange(index, event)
@@ -1009,13 +985,13 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //             <button
     //               type='button'
     //               onClick={() => {
-    //                 onSubmit(form1id);
+    //                 onSubmit(form16id);
     //               }}
     //               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
     //               disabled={
-    //                 !form1Inputs.karyalaya ||
-    //                 !form1Inputs.arthikbarsha ||
-    //                 form1Inputs.date === '' ||
+    //                 !form16Inputs.karyalaya ||
+    //                 !form16Inputs.arthikbarsha ||
+    //                 form16Inputs.date === '' ||
     //                 inputFields.khadyanna == ''
     //               }
     //             >
@@ -1028,9 +1004,9 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
     //               }}
     //               className=' disabled:opacity-75 disabled:cursor-not-allowed bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
     //               disabled={
-    //                 !form1Inputs.karyalaya ||
-    //                 !form1Inputs.arthikbarsha ||
-    //                 form1Inputs.date === '' ||
+    //                 !form16Inputs.karyalaya ||
+    //                 !form16Inputs.arthikbarsha ||
+    //                 form16Inputs.date === '' ||
     //                 inputFields.khadyanna == ''
     //               }
     //             >
@@ -1046,4 +1022,4 @@ const EditForm1Modal = ({ editModal, setEditModal, form1id, attributes }) => {
   );
 };
 
-export default EditForm1Modal;
+export default EditForm16Modal;

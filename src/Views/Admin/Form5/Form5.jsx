@@ -344,62 +344,67 @@ const Form5 = () => {
                 key={index}
                 className='my-3 flex-col justify-center items-center space-x-5 border-2 p-4'
               >
-                <div className='flex mb-3'>
-                  <select
-                    id='countries'
-                    name='bibaran'
-                    className='mr-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    required
-                    value={inputField.bibaran}
-                    onChange={(event) => handleInputChange(index, event)}
-                  >
-                    <option value='' selected disabled>
-                      एउटा छान्नुहोस्
-                    </option>
-                    <option value='अति उत्तम'>अति उत्तम </option>
-                    <option value='उत्तम'>उत्तम </option>
-                    <option value='सन्तोषजनक'>सन्तोषजनक</option>
-                    <option value='सामान्य'>सामान्य</option>
-                    <option value='स्तरीकरणमा नपरेको'>स्तरीकरणमा नपरेको</option>
-                  </select>
-                  <button
-                    type='button'
-                    onClick={() => handleAddFields()}
-                    className='mr-2 flex justify-center items-center py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
-                  >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5 mr-2'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
+                <div className='flex mb-3 items-center justify-between'>
+                  <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                    रो नं. {index + 1}
+                  </label>
+                  <div className='flex'>
+                    <button
+                      type='button'
+                      onClick={() => handleAddFields()}
+                      className='mr-2 flex justify-center items-center py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
                     >
-                      <path
-                        fillRule='evenodd'
-                        d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
-                        clipRule='evenodd'
-                      />
-                    </svg>
-                    <span>नया</span>
-                  </button>
-                  <button
-                    type='button'
-                    className='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
-                    onClick={() => handleRemoveFields(index)}
-                  >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5 mr-2'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                      >
+                        <path
+                          fillRule='evenodd'
+                          d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                      <span>नया</span>
+                    </button>
+                    <button
+                      type='button'
+                      className='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
+                      onClick={() => handleRemoveFields(index)}
                     >
-                      <path
-                        fillRule='evenodd'
-                        d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
-                        clipRule='evenodd'
-                      />
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                      >
+                        <path
+                          fillRule='evenodd'
+                          d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
+                <select
+                  id='countries'
+                  name='bibaran'
+                  className='mr-5 mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  required
+                  value={inputField.bibaran}
+                  onChange={(event) => handleInputChange(index, event)}
+                >
+                  <option value='' selected disabled>
+                    एउटा छान्नुहोस्
+                  </option>
+                  <option value='अति उत्तम'>अति उत्तम </option>
+                  <option value='उत्तम'>उत्तम </option>
+                  <option value='सन्तोषजनक'>सन्तोषजनक</option>
+                  <option value='सामान्य'>सामान्य</option>
+                  <option value='स्तरीकरणमा नपरेको'>स्तरीकरणमा नपरेको</option>
+                </select>
 
                 <div className='flex flex-wrap md:flex-nowrap mb-2 space-x-3'>
                   <div className='mb-2'>
