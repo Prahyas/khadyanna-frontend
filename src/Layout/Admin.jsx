@@ -21,6 +21,8 @@ import Form10 from '../Views/Admin/Form10/Form10';
 import Form10Report from '../Views/Admin/Form10/Form10Report';
 import Form11 from '../Views/Admin/Form11/Form11';
 import Form11Report from '../Views/Admin/Form11/Form11Report';
+import Form15 from '../Views/Admin/Form15/Form15';
+import Form15Report from '../Views/Admin/Form15/Form15Report';
 
 const Admin = () => {
   const [showNav, setshowNav] = useState(false);
@@ -206,6 +208,33 @@ const Admin = () => {
                     />
                     <Route
                       path='form11report'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                {currentUser.user.department === 'PS' ? (
+                  <>
+                    <Route path='form15' element={<Form15 />} />
+                    <Route path='form15report' element={<Form15Report />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path='form15'
+                      element={
+                        <NoAuthorization
+                          errorTitle={`माफ गर्नुहोला!`}
+                          errorMsg={`तपाईसंग अनुमति छैन`}
+                        />
+                      }
+                    />
+                    <Route
+                      path='form15report'
                       element={
                         <NoAuthorization
                           errorTitle={`माफ गर्नुहोला!`}
