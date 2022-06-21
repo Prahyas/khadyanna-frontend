@@ -42,7 +42,6 @@ const Form21 = () => {
     karyalaya: '',
     form21collection: [
       {
-        khadyanna: '',
         form21months: {
           sanchalanmiti: '',
           nam: '',
@@ -109,7 +108,6 @@ const Form21 = () => {
   const handleAddFields = () => {
     const values = [...inputFields];
     values.push({
-      khadyanna: '',
       form21months: {
         sanchalanmiti: '',
         nam: '',
@@ -149,7 +147,6 @@ const Form21 = () => {
         setform21Inputs(initialFormState);
         setInputFields([
           {
-            khadyanna: '',
             form21months: {
               sanchalanmiti: '',
               nam: '',

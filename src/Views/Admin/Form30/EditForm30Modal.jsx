@@ -7,85 +7,55 @@ import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
+const EditForm30Modal = ({ editModal, setEditModal, form30id, attributes }) => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
-  const { fetchform21Function } = useContext(DataContext);
-  const { fetchform21 } = fetchform21Function;
+  const { fetchform30Function } = useContext(DataContext);
+  const { fetchform30 } = fetchform30Function;
   const [inputFields, setInputFields] = useState([
-    ...attributes.form21collection,
+    ...attributes.form30collection,
   ]);
   const initialFormState = {
     date: attributes.date,
     timecode: parseInt(attributes.timecode),
     arthikbarsha: attributes.arthikbarsha,
     karyalaya: attributes.karyalaya,
-    form21collection: attributes.form21collection,
+    form30collection: attributes.form30collection,
   };
 
-  const [form21Inputs, setform21Inputs] = useState(initialFormState);
+  const [form30Inputs, setform30Inputs] = useState(initialFormState);
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
-    if (event.target.name === 'sanchalanmiti') {
-      values[index].form21months.sanchalanmiti = event.target.value;
-    } else if (event.target.name === 'nam') {
-      values[index].form21months.nam = event.target.value;
-    } else if (event.target.name === 'sthan') {
-      values[index].form21months.sthan = event.target.value;
-    } else if (event.target.name === 'mahila') {
-      values[index].form21months.mahila = event.target.value;
-    } else if (event.target.name === 'purush') {
-      values[index].form21months.purush = event.target.value;
-    } else if (event.target.name === 'dalit') {
-      values[index].form21months.dalit = event.target.value;
-    } else if (event.target.name === 'janjati') {
-      values[index].form21months.janjati = event.target.value;
-    } else if (event.target.name === 'anya') {
-      values[index].form21months.anya = event.target.value;
-    } else if (event.target.name === 'bipanna') {
-      values[index].form21months.bipanna = event.target.value;
-    } else if (event.target.name === 'anya2') {
-      values[index].form21months.anya2 = event.target.value;
-    } else if (event.target.name === 'namnum') {
-      values[index].form21months.namnum = event.target.value;
-    } else if (event.target.name === 'nikaya') {
-      values[index].form21months.nikaya = event.target.value;
-    } else if (event.target.name === 'prasixyak') {
-      values[index].form21months.prasixyak = event.target.value;
-    } else if (event.target.name === 'bisayabastu') {
-      values[index].form21months.bisayabastu = event.target.value;
+    if (event.target.name === 'barshikpunjigat') {
+      values[index].form30months.barshikpunjigat = event.target.value;
+    } else if (event.target.name === 'barshikchalu') {
+      values[index].form30months.barshikchalu = event.target.value;
+    } else if (event.target.name === 'mahinapunjigat') {
+      values[index].form30months.mahinapunjigat = event.target.value;
+    } else if (event.target.name === 'mahinachalu') {
+      values[index].form30months.mahinachalu = event.target.value;
     } else {
-      values[index].form21months.kaifiyat = event.target.value;
+      values[index].form30months.mahinarajaswo = event.target.value;
     }
 
     setInputFields(values);
-    setform21Inputs({ ...form21Inputs, form21collection: values });
+    setform30Inputs({ ...form30Inputs, form30collection: values });
   };
 
   const handleAddFields = () => {
     const values = [...inputFields];
     values.push({
-      form21months: {
-        sanchalanmiti: '',
-        nam: '',
-        sthan: '',
-        mahila: 0,
-        purush: 0,
-        dalit: 0,
-        janjati: 0,
-        anya: 0,
-        bipanna: 0,
-        anya2: 0,
-        namnum: '',
-        nikaya: '',
-        prasixyak: '',
-        bisayabastu: '',
-        kaifiyat: '',
+      form30months: {
+        barshikpunjigat: 0,
+        barshikchalu: 0,
+        mahinapunjigat: 0,
+        mahinachalu: 0,
+        mahinarajaswo: 0,
       },
     });
     setInputFields(values);
-    setform21Inputs({ ...form21Inputs, form21months: values });
+    setform30Inputs({ ...form30Inputs, form30months: values });
   };
 
   const handleRemoveFields = (index) => {
@@ -94,7 +64,7 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
       values.splice(index, 1);
     }
     setInputFields(values);
-    setform21Inputs({ ...form21Inputs, form21months: values });
+    setform30Inputs({ ...form30Inputs, form30months: values });
   };
 
   const successNotification = () =>
@@ -120,14 +90,14 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
     });
   };
 
-  const onSubmit = async (form21id) => {
+  const onSubmit = async (form30id) => {
     try {
-      await axios.put(`${api}/api/form21s/${form21id}`, {
-        data: form21Inputs,
+      await axios.put(`${api}/api/form30s/${form30id}`, {
+        data: form30Inputs,
       });
-      setform21Inputs(initialFormState);
+      setform30Inputs(initialFormState);
       successNotification();
-      fetchform21();
+      fetchform30();
       setEditModal(false);
     } catch (error) {
       errorNotification(error);
@@ -140,7 +110,7 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
         <div className=' z-[3] w-full h-[15%] border-b-2 flex items-center p-5'>
           <div class='flex justify-between w-full'>
             <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
-              प्रयोगशाला विश्लेषण प्रतिवेदन सारांश
+              मासिक बित्तिय प्रगति
             </h3>
             <button
               type='button'
@@ -173,10 +143,10 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
                   name='karyalaya'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
-                  value={form21Inputs.karyalaya}
+                  value={form30Inputs.karyalaya}
                   onChange={(e) =>
-                    setform21Inputs({
-                      ...form21Inputs,
+                    setform30Inputs({
+                      ...form30Inputs,
                       karyalaya: e.target.value,
                     })
                   }
@@ -200,10 +170,10 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
               id='text'
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='कार्यालय'
-              value={form21Inputs.karyalaya}
+              value={form30Inputs.karyalaya}
               onChange={(e) =>
-                setform21Inputs({
-                  ...form21Inputs,
+                setform30Inputs({
+                  ...form30Inputs,
                   karyalaya: e.target.value,
                 })
               }
@@ -218,10 +188,10 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
                   type='text'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder='आ . ब'
-                  value={form21Inputs.arthikbarsha}
+                  value={form30Inputs.arthikbarsha}
                   onChange={(e) =>
-                    setform21Inputs({
-                      ...form21Inputs,
+                    setform30Inputs({
+                      ...form30Inputs,
                       arthikbarsha: e.target.value,
                     })
                   }
@@ -235,14 +205,14 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
                 <NepaliDatePicker
                   inputClassName='form-control'
                   className='mb-6'
-                  value={form21Inputs.date}
+                  value={form30Inputs.date}
                   onChange={(value) => {
                     const adDate = bsToAd(value);
 
                     const newtimestamp = Date.parse(adDate);
 
-                    setform21Inputs({
-                      ...form21Inputs,
+                    setform30Inputs({
+                      ...form30Inputs,
                       date: value,
                       timecode: newtimestamp,
                     });
@@ -330,50 +300,63 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
                     </div>
 
                     <div className='flex flex-wrap md:flex-row flex-col'>
-                      <div className='mr-5 mb-5 grow'>
+                      <div className='mr-5 mb-6 grow'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कार्यक्रम संचालन मिति/अवधि
+                          बार्षिक बजेट (पुँजीगत)
                         </label>
-                        <NepaliDatePicker
-                          inputClassName='form-control'
-                          className='mb-6'
-                          value={inputField.form21months.sanchalanmiti}
-                          onChange={(value) => {
-                            const adDate = bsToAd(value);
-                            const newtimestamp = Date.parse(adDate);
-                            setInputFields([
-                              {
-                                form21months: {
-                                  ...inputField.form21months,
-                                  sanchalanmiti: value,
-                                },
-                              },
-                            ]);
-                          }}
-                          options={{ calenderLocale: 'ne', valueLocale: 'en' }}
+                        <input
+                          type='number'
+                          min={0}
+                          name='barshikpunjigat'
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                          placeholder='पटक'
+                          value={inputField.form30months.barshikpunjigat}
+                          onChange={(event) => handleInputChange(index, event)}
+                          required
                         />
                       </div>
 
                       <div className='mr-5 mb-6 grow'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कार्यक्रमको नाम
+                          बार्षिक बजेट (चालु)
                         </label>
                         <input
-                          name='nam'
+                          type='number'
+                          min={0}
+                          name='barshikchalu'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.nam}
+                          value={inputField.form30months.barshikchalu}
+                          onChange={(event) => handleInputChange(index, event)}
+                          required
+                        />
+                      </div>
+
+                      <div className='mr-5 mb-6 grow'>
+                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                          यस महिनाको खर्च (पुँजीगत)
+                        </label>
+                        <input
+                          type='number'
+                          min={0}
+                          name='mahinapunjigat'
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                          placeholder='संख्या'
+                          value={inputField.form30months.mahinapunjigat}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
                       </div>
                       <div className='mr-5 mb-6 grow'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कार्यक्रम संचालन स्थान
+                          यस महिनाको खर्च (चालु )
                         </label>
                         <input
-                          name='sthan'
+                          type='number'
+                          min={0}
+                          name='mahinachalu'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.sthan}
+                          placeholder='संख्या'
+                          value={inputField.form30months.mahinachalu}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
@@ -382,173 +365,14 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
                     <div className='flex flex-wrap md:flex-row flex-col'>
                       <div className='mr-5 mb-6 grow'>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          लैङगिक सहभागिता(महिला)
+                          यस महिनाको राजस्वो
                         </label>
                         <input
                           type='number'
                           min={0}
-                          name='mahila'
+                          name='mahinarajaswo'
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.mahila}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          लैङगिक सहभागिता(पुरुष)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='purush'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.purush}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className='flex flex-wrap md:flex-row flex-col'>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          सामाजिक समाबेशी सहभागिता संख्या(दलित)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='dalit'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.dalit}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          सामाजिक समाबेशी सहभागिता संख्या(जनजाती)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='janjati'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.janjati}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          सामाजिक समाबेशी सहभागिता संख्या(अन्य)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='anya'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.anya}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className='flex flex-wrap md:flex-row flex-col'></div>
-                    <div className='flex flex-wrap md:flex-row flex-col'>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          आर्थिक सहभागिता(बिपन्न)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='bipanna'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.bipanna}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          आर्थिक सहभागिता(अन्य)
-                        </label>
-                        <input
-                          type='number'
-                          min={0}
-                          name='anya2'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.anya2}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className='flex flex-wrap md:flex-row flex-col'>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कार्यक्रम संयोजक नाम फोन नं
-                        </label>
-                        <input
-                          type='text'
-                          name='namnum'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.namnum}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          उपस्थित निकायहरु
-                        </label>
-                        <input
-                          type='text'
-                          name='nikaya'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.nikaya}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          प्रसिक्ष्यक
-                        </label>
-                        <input
-                          type='text'
-                          name='prasixyak'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.prasixyak}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className='flex flex-wrap md:flex-row flex-col'>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कार्यक्रम/कार्यपत्रमा समेटिएका बिषयबस्तु
-                        </label>
-                        <input
-                          type='text'
-                          name='bisayabastu'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          value={inputField.form21months.bisayabastu}
-                          onChange={(event) => handleInputChange(index, event)}
-                          required
-                        />
-                      </div>
-                      <div className='mr-5 mb-6 grow'>
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                          कैफियत
-                        </label>
-                        <textarea
-                          type='text'
-                          name='kaifiyat'
-                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                          placeholder='कैफियत'
-                          value={inputField.form21months.kaifiyat}
+                          value={inputField.form30months.mahinarajaswo}
                           onChange={(event) => handleInputChange(index, event)}
                           required
                         />
@@ -567,14 +391,13 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
             <button
               type='button'
               onClick={() => {
-                onSubmit(form21id);
+                onSubmit(form30id);
               }}
               className='mr-2 text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               disabled={
-                !form21Inputs.karyalaya ||
-                !form21Inputs.arthikbarsha ||
-                form21Inputs.date === '' ||
-                inputFields.prayogsala == ''
+                !form30Inputs.karyalaya ||
+                !form30Inputs.arthikbarsha ||
+                form30Inputs.date === ''
               }
             >
               पेश गर्नुहोस्
@@ -595,4 +418,4 @@ const EditForm21Modal = ({ editModal, setEditModal, form21id, attributes }) => {
   );
 };
 
-export default EditForm21Modal;
+export default EditForm30Modal;

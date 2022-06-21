@@ -16,6 +16,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
   const [dropdown8, setdropdown8] = useState(false);
   const [dropdown9, setdropdown9] = useState(false);
   const [dropdown10, setdropdown10] = useState(false);
+  const [dropdown11, setdropdown11] = useState(false);
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const location = useLocation();
@@ -640,6 +641,66 @@ const Sidebar = ({ showNav, setshowNav }) => {
               <li>
                 <NavLink
                   to='/admin/form21report'
+                  onClick={() => {
+                    setshowNav(!showNav);
+                  }}
+                  className='flex items-center p-1 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                >
+                  रिपोर्ट
+                </NavLink>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button
+              type='button'
+              className='flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+              onClick={() => setdropdown11(!dropdown11)}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+              >
+                <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+              </svg>
+              <span
+                className='flex-1 ml-3 text-left text-sm break-words'
+                sidebar-toggle-item=''
+              >
+                मासिक बित्तिय प्रगति
+              </span>
+              <svg
+                sidebar-toggle-item=''
+                className='w-6 h-6'
+                fill='currentColor'
+                viewBox='0 0 20 20'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                  clipRule='evenodd'
+                ></path>
+              </svg>
+            </button>
+
+            <ul className={`${dropdown11 ? 'block' : 'hidden'} py-2 space-y-2`}>
+              <li>
+                <NavLink
+                  to='/admin/form30'
+                  onClick={() => {
+                    setshowNav(!showNav);
+                  }}
+                  className='flex items-center p-1 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                >
+                  नया इन्ट्री
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to='/admin/form30report'
                   onClick={() => {
                     setshowNav(!showNav);
                   }}
