@@ -21,6 +21,10 @@ const Sidebar = ({ showNav, setshowNav }) => {
   const [api, setapi] = apiData;
   const location = useLocation();
 
+  const [currentUser, setcurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser'))
+  );
+
   return (
     <>
       <div
@@ -711,27 +715,31 @@ const Sidebar = ({ showNav, setshowNav }) => {
               </li>
             </ul>
           </li>
-          <li>
-            <NavLink
-              to='/admin/settings'
-              onClick={() => setshowNav(!showNav)}
-              className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z'
-                  clipRule='evenodd'
-                />
-              </svg>
-              <span className='ml-3'>सेटिङ</span>
-            </NavLink>
-          </li>
+          {currentUser.user.username === 'Admin' ? (
+            <>
+              <li>
+                <NavLink
+                  to='/admin/userlist'
+                  onClick={() => setshowNav(!showNav)}
+                  className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                  <span className='ml-3'>सेटिङ</span>
+                </NavLink>
+              </li>
+            </>
+          ) : null}
         </ul>
       </div>
     </>

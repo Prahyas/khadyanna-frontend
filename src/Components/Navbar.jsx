@@ -6,17 +6,20 @@ import { DataContext } from '../ContextAPI/data';
 const Navbar = ({ showNav, setshowNav }) => {
   let navigate = useNavigate();
   const [dropdown, setdropdown] = useState(false);
-  const { currentUserData } = useContext(DataContext);
-  const [currentUser, setcurrentUser] = currentUserData;
+  // const { currentUserData } = useContext(DataContext);
+  // const [currentUser, setcurrentUser] = currentUserData;
+  const [currentUser, setcurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser'))
+  );
 
   const Logout = (e) => {
     e.preventDefault();
-    setcurrentUser(null);
+    setcurrentUser({});
     navigate('/auth/login');
   };
 
   useEffect(() => {
-    console.log('currentUser', currentUser);
+    console.log('currentUsernavbar', currentUser);
   }, [currentUser]);
 
   return (

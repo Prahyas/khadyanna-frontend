@@ -17,7 +17,8 @@ export const DataProvider = (props) => {
   const [form19, setform19] = useState([]);
   const [form21, setform21] = useState([]);
   const [form30, setform30] = useState([]);
-  const [currentUser, setcurrentUser] = useState(null);
+  const [userList, setuserList] = useState([]);
+  const [currentUser, setcurrentUser] = useState({});
 
   useEffect(() => {
     const getLocal = () => {
@@ -37,6 +38,10 @@ export const DataProvider = (props) => {
     };
     saveLocal();
   }, [currentUser]);
+
+  useEffect(() => {
+    console.log('currentUserconotext', currentUser);
+  }, []);
 
   const fetchform1 = async () => {
     try {
@@ -148,8 +153,18 @@ export const DataProvider = (props) => {
       console.error(error.message);
     }
   };
+  const fetchuserList = async () => {
+    try {
+      const response = await axios.get(`${api}/api/users`);
+      console.log(response.data);
+      setuserList(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
+    fetchuserList();
     fetchform1();
     fetchform3();
     fetchform5();
@@ -189,6 +204,8 @@ export const DataProvider = (props) => {
         fetchform21Function: { fetchform21 },
         form30Data: [form30, setform30],
         fetchform30Function: { fetchform30 },
+        userListData: [userList, setuserList],
+        fetchuserListFunction: { fetchuserList },
         currentUserData: [currentUser, setcurrentUser],
       }}
     >

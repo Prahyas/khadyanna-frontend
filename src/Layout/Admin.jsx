@@ -31,11 +31,47 @@ import Form21 from '../Views/Admin/Form21/Form21';
 import Form21Report from '../Views/Admin/Form21/Form21Report';
 import Form30 from '../Views/Admin/Form30/Form30';
 import Form30Report from '../Views/Admin/Form30/Form30Report';
+import axios from 'axios';
+import UserList from '../Views/Admin/Settings/UserList';
 
 const Admin = () => {
+  const { apiData } = useContext(DataContext);
+  const [api, setapi] = apiData;
   const [showNav, setshowNav] = useState(false);
-  const { currentUserData } = useContext(DataContext);
-  const [currentUser, setcurrentUser] = currentUserData;
+  // const [userwithRoles, setuserwithRoles] = useState([]);
+  // const { currentUserData } = useContext(DataContext);
+  // const [currentUser, setcurrentUser] = currentUserData;
+  // const { userwithRolesData } = useContext(DataContext);
+  // const [userwithRoles, setuserwithRoles] = userwithRolesData;
+
+  const [currentUser, setcurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser'))
+  );
+
+  // const fetchuserswithRoles = async () => {
+  //   try {
+  //     const jwt = await currentUser.jwt;
+  //     console.log('jwt', jwt);
+  //     const response = await axios.get(
+  //       `${api}/api/users?populate[0]=rolescollection`
+  //     );
+  //     console.log('Response', response.data[0].id);
+  //     const singleUser = response.data.find((item) => {
+  //       return item.username === currentUser.user.username;
+  //     });
+  //     setuserwithRoles(Object.values(singleUser.rolescollection));
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchuserswithRoles();
+  // }, []);
+
+  useEffect(() => {
+    console.log('currentUser', currentUser.user.username);
+  }, [currentUser]);
 
   return (
     <>
@@ -45,31 +81,23 @@ const Admin = () => {
 
       <div className='bg-gray-100 lg:ml-[20%] w-[100%] lg:w-[80%] min-h-screen p-6'>
         <div className='mt-14'>
-          {currentUser === null ? (
-            <>
-              <Routes>
-                <Route
-                  path='*'
-                  element={
-                    <NotFound
-                      errorTitle={`Sorry`}
-                      errorMsg={`You are not authorized to access this page.`}
-                    />
-                  }
-                />
-              </Routes>
-            </>
-          ) : (
+          {Object.keys(currentUser).length > 0 ? (
             <>
               <Routes>
                 <Route path='dashboard' element={<Dashboard />} />
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
+                    {console.log('admintrue')}
                     <Route path='form1' element={<Form1 />} />
                     <Route path='form1report' element={<Form1Report />} />
                   </>
                 ) : (
                   <>
+                    {console.log('adminfalse')}
+
                     <Route
                       path='form1'
                       element={
@@ -90,7 +118,10 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
                     <Route path='form3' element={<Form3 />} />
                     <Route path='form3report' element={<Form3Report />} />
@@ -117,7 +148,9 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ? (
                   <>
                     <Route path='form5' element={<Form5 />} />
                     <Route path='form5report' element={<Form5Report />} />
@@ -144,7 +177,9 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'NFFRL' ||
+                currentUser.user.username === 'FTQCO' ? (
                   <>
                     <Route path='form7' element={<Form7 />} />
                     <Route path='form7report' element={<Form7Report />} />
@@ -171,7 +206,9 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'NFFRL' ||
+                currentUser.user.username === 'FTQCO' ? (
                   <>
                     <Route path='form10' element={<Form10 />} />
                     <Route path='form10report' element={<Form10Report />} />
@@ -198,7 +235,8 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FIEQCO' ? (
                   <>
                     <Route path='form11' element={<Form11 />} />
                     <Route path='form11report' element={<Form11Report />} />
@@ -225,7 +263,10 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
                     <Route path='form15' element={<Form15 />} />
                     <Route path='form15report' element={<Form15Report />} />
@@ -252,7 +293,9 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ? (
                   <>
                     <Route path='form16' element={<Form16 />} />
                     <Route path='form16report' element={<Form16Report />} />
@@ -279,7 +322,10 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FFSQRD' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
                     <Route path='form19' element={<Form19 />} />
                     <Route path='form19report' element={<Form19Report />} />
@@ -306,7 +352,10 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FTDND' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
                     <Route path='form21' element={<Form21 />} />
                     <Route path='form21report' element={<Form21Report />} />
@@ -333,7 +382,10 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {currentUser.user.department === 'PS' ? (
+                {currentUser.user.username === 'Admin' ||
+                currentUser.user.username === 'FTQCO' ||
+                currentUser.user.username === 'FIEQCO' ||
+                currentUser.user.username === 'FTQCDO' ? (
                   <>
                     <Route path='form30' element={<Form30 />} />
                     <Route path='form30report' element={<Form30Report />} />
@@ -360,9 +412,21 @@ const Admin = () => {
                     />
                   </>
                 )}
-                {/* <Route path='form2' element={<Form2 />} />
-                <Route path='form2report' element={<Form2Report />} /> */}
-                <Route path='settings' element={<Settings />} />
+                <Route path='userlist' element={<UserList />} />
+              </Routes>
+            </>
+          ) : (
+            <>
+              <Routes>
+                <Route
+                  path='*'
+                  element={
+                    <NotFound
+                      errorTitle={`Sorry`}
+                      errorMsg={`You are not authorized to access this page.`}
+                    />
+                  }
+                />
               </Routes>
             </>
           )}
