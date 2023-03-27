@@ -1,4 +1,5 @@
-# khadyanna-frontend
+# khadyanna-frontend 
+note: The app is in Nepali Language
 
 HOW TO USE:
 1. click on the link : https://foodprojectnepal.netlify.app/
