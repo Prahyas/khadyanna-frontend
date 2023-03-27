@@ -14,10 +14,15 @@ The web app system developed using React is a food grain record-keeping and repo
 Features:
 
 Authentication: Users can register and login to the system based on their roles. The system includes different roles such as admin, moderators, and users.
+
 Dashboard: The dashboard provides an overview of the food grain records, including the total number of grains, the number of grains added, and the number of grains removed.
+
 Record Keeping: Users can create new records for food grains, edit existing records, and delete records as needed. The system allows users to add details such as the type of grain, quantity, and date of storage.
+
 Report Generation: The system allows users to generate and print reports based on different criteria such as the type of grain, quantity, and date of storage.
+
 Account Management: The system includes different user roles with varying levels of access to the system. Admin users can manage users, while moderators can add and delete records, and users can only view the records.
+
 Technology:
 The system is developed using React, a JavaScript library for building user interfaces. The front-end is built using HTML, CSS, and JavaScript. The back-end is built using Node.js and MongoDB, which provide the database for storing food grain records and user account details.
 
