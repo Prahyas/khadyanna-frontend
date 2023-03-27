@@ -9,6 +9,8 @@ HOW TO USE:
 3. add, delete, edit data.
 4. generate and print reports.
 
+<img width="960" alt="restroapp" src="https://user-images.githubusercontent.com/44996309/228004926-07e7625f-5d56-449f-b807-ba294a1f4809.png">
+
 Overview:
 The web app system developed using React is a food grain record-keeping and report generation system. It is designed to maintain accurate records of food grains in storage and generate reports as needed. The system allows users to create, edit, and delete data, and generate and print reports. It also includes account management features with different user roles like admin, moderators, and users.
 
