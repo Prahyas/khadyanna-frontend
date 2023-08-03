@@ -9,6 +9,8 @@ HOW TO USE:
 3. add, delete, edit data.
 4. generate and print reports.
 
+Note: Just wait for sometime for server to load.
+
 ![khadyanna](https://user-images.githubusercontent.com/44996309/228005174-a62d8164-bb34-4f8f-99d7-e00265e16dd7.png)
 
 Overview:
