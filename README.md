@@ -1,5 +1,5 @@
 # khadyanna-frontend 
-#note: just for demo purpose. and its in Nepali Language
+#note: Just for demo purposes not a fully functional application. And Just wait for sometime for server to load.
 
 HOW TO USE:
 1. click on the link : https://foodprojectnepal.netlify.app/
